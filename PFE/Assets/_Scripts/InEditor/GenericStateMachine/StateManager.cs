@@ -22,8 +22,13 @@ public abstract class StateManager<T> : MonoBehaviour where T : Enum
     public void TransitionToState(T stateKey)
     {
         CurrentState.OnExit();
+
+        BaseState<T> PreviousState;
+        PreviousState = CurrentState;
         CurrentState = States[stateKey];
-        CurrentState.OnEnter();
+
+
+        CurrentState.OnEnter(PreviousState);
     }
 
     public abstract void CreateStates();
