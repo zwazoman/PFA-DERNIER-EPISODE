@@ -1,16 +1,16 @@
+using System;
 using UnityEngine;
 
-public class BaseState : MonoBehaviour
+public abstract class BaseState<T> where T : Enum
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public BaseState(T key)
     {
-        
+        StateKey = key;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public T StateKey { get; private set; }
+
+    public abstract void OnEnter();
+    public abstract void UpdateState();
+    public abstract void OnExit();
 }

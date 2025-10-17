@@ -1,4 +1,15 @@
+using System;
 using UnityEngine;
+
+[Flags]
+public enum EnormeChiasseCoulante
+{
+    Diarhée,
+    Collique,
+    Courante,
+    Coulante,
+    Tourista,
+}
 
 public class ComponentPickup : MonoBehaviour
 {

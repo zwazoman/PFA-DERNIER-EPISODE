@@ -1,5 +1,30 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class StateManager : MonoBehaviour
+public abstract class StateManager<T> : MonoBehaviour where T : Enum
 {
+    protected Dictionary<T, BaseState<T>> States = new();
+    protected BaseState<T> CurrentState;
+
+    private void Start()
+    {
+        CreateStates();
+
+        CurrentState.OnEnter();
+    }
+
+    private void Update()
+    {
+        CurrentState.UpdateState();
+    }
+
+    public void TransitionToState(T stateKey)
+    {
+        CurrentState.OnExit();
+        CurrentState = States[stateKey];
+        CurrentState.OnEnter();
+    }
+
+    public abstract void CreateStates();
 }
