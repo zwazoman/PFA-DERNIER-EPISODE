@@ -7,7 +7,7 @@ using System.Collections.Generic;
 /// </summary>
 public class WeaponCore : MonoBehaviour
 {
-    #region events
+    #region events a gérer avec input system de pref
     [HideInInspector] public UnityEvent OnShoot;
     [HideInInspector] public UnityEvent OnAim;
     [HideInInspector] public UnityEvent OnReload;
@@ -16,7 +16,7 @@ public class WeaponCore : MonoBehaviour
 
     [HideInInspector] public List<WeaponComponent> components = new();
 
-    public void AddWeaponComponent(GameObject componentPrefab)
+    public void TryAddNewWeaponComponent(GameObject componentPrefab)
     {
         Instantiate(componentPrefab, transform);
 

@@ -1,11 +1,5 @@
 using UnityEngine;
 
-public enum UniqueWeaponComponents
-{
-    Magazine,
-    ROF,
-}
-
 public enum WeaponActions
 {
     Reload,
@@ -13,6 +7,5 @@ public enum WeaponActions
     Aim,
     Alt,
     Inspect, //?
-
 }
 

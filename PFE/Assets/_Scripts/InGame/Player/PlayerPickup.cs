@@ -15,6 +15,6 @@ public class PlayerPickup : MonoBehaviour
 
     public void Pickup()
     {
-        _core.AddWeaponComponent(pickupTest.Pickup());
+        _core.TryAddNewWeaponComponent(pickupTest.Pickup());
     }
 }
