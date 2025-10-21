@@ -11,7 +11,7 @@ public class WC_Magazine : UniqueWeaponComponent
     {
         _currentAmmo = _ammoCapacity;
         core.OnReload.AddListener(Reload);
-        core.OnShoot.AddListener(ConsumeAmmo);
+        //core.OnShoot.AddListener(ConsumeAmmo);
     }
 
     void Reload()

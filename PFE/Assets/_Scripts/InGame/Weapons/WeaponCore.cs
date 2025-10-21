@@ -8,7 +8,8 @@ using System.Collections.Generic;
 public class WeaponCore : MonoBehaviour
 {
     #region events a gérer avec input system de pref
-    [HideInInspector] public UnityEvent OnShoot;
+    [HideInInspector] public UnityEvent OnStartShooting;
+    [HideInInspector] public UnityEvent OnStopShooting;
     [HideInInspector] public UnityEvent OnAim;
     [HideInInspector] public UnityEvent OnReload;
     [HideInInspector] public UnityEvent OnAlt;
@@ -26,6 +27,11 @@ public class WeaponCore : MonoBehaviour
 
     private void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Mouse0))
+            OnStartShooting?.Invoke();
+        if(Input.GetKeyUp(KeyCode.Mouse0))
+            OnStopShooting?.Invoke();
+
         if(Input.GetKeyDown(KeyCode.R))
             OnReload.Invoke();
     }
