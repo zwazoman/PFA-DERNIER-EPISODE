@@ -54,7 +54,7 @@ public class WC_Barrel : WeaponComponent
         IsShooting = false;
     }
 
-    protected virtual async void Shoot()
+    protected virtual void Shoot()
     {
         OnShoot?.Invoke();
     }
