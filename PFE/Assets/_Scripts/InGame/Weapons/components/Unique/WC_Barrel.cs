@@ -15,9 +15,9 @@ public class WC_Barrel : WeaponComponent
     [SerializeField] protected float RateOfFire;
     [SerializeField] protected float FireDelay;
     [SerializeField] protected GameObject ProjectilePrefab;
-    [SerializeField] protected float Range;
 
     protected bool IsShooting = false;
+    protected bool CanShoot = true;
 
     public override void Activate()
     {
@@ -42,6 +42,12 @@ public class WC_Barrel : WeaponComponent
         IsShooting = true;
         while (IsShooting)
         {
+            if (!CanShoot)
+            {
+                await UniTask.Yield();
+                continue;
+            }
+                
             Shoot();
             await HandleDelay();
         }
@@ -57,12 +63,16 @@ public class WC_Barrel : WeaponComponent
     protected virtual void Shoot()
     {
         OnShoot?.Invoke();
+
+        Instantiate(ProjectilePrefab, transform.position, core.gameObject.transform.rotation);
     }
 
     protected virtual async UniTask HandleDelay()
     {
         OnDelay?.Invoke();
 
+        CanShoot = false;
         await UniTask.WaitForSeconds(FireDelay);
+        CanShoot = true;
     }
 }

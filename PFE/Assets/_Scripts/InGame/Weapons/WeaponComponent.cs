@@ -9,7 +9,7 @@ public class WeaponComponent : MonoBehaviour
 
     private void Awake()
     {
-        TryGetComponent(out core);
+        transform.parent.TryGetComponent(out core);
     }
 
     protected virtual void LinkToWeaponAction() { }

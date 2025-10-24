@@ -17,12 +17,30 @@ public class WeaponCore : MonoBehaviour
 
     [HideInInspector] public List<WeaponComponent> components = new();
 
+    private void Start()
+    {
+        CheckForComponents();
+    }
+
     public void TryAddNewWeaponComponent(GameObject componentPrefab)
     {
         Instantiate(componentPrefab, transform);
 
         WeaponComponent newComponent = componentPrefab.GetComponent<WeaponComponent>();
         newComponent.Activate();
+        components.Add(newComponent);
+    }
+
+    void CheckForComponents()
+    {
+        foreach(WeaponComponent weaponComp in GetComponentsInChildren<WeaponComponent>())
+        {
+            if (!components.Contains(weaponComp))
+            {
+                weaponComp.Activate();
+                components.Add(weaponComp);
+            }
+        }
     }
 
     private void Update()
