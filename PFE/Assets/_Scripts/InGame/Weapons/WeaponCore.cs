@@ -2,18 +2,30 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections.Generic;
+using System;
 /// <summary>
 /// reçoit les events liés aux armes et les lies aux WeaponComponents attachés
 /// </summary>
 public class WeaponCore : MonoBehaviour
 {
     #region events a gérer avec input system de pref
-    [HideInInspector] public UnityEvent OnStartShooting;
-    [HideInInspector] public UnityEvent OnStopShooting;
-    [HideInInspector] public UnityEvent OnAim;
-    [HideInInspector] public UnityEvent OnReload;
-    [HideInInspector] public UnityEvent OnAlt;
+    public event Action OnStartShootingLeft;
+    public event Action OnStopShootingLeft;
+
+    public event Action OnStartShootingRight;
+    public event Action OnStopShootingRight;
+
+    public event Action OnReload;
+
+    public event Action OnAlt;
     #endregion
+
+    #region Events
+
+    public event Action<WeaponComponent> OnNewComponent;
+
+    #endregion
+
 
     [HideInInspector] public List<WeaponComponent> components = new();
 
@@ -27,8 +39,7 @@ public class WeaponCore : MonoBehaviour
         Instantiate(componentPrefab, transform);
 
         WeaponComponent newComponent = componentPrefab.GetComponent<WeaponComponent>();
-        newComponent.Activate();
-        components.Add(newComponent);
+        ActivateComponent(newComponent);
     }
 
     void CheckForComponents()
@@ -37,18 +48,34 @@ public class WeaponCore : MonoBehaviour
         {
             if (!components.Contains(weaponComp))
             {
-                weaponComp.Activate();
-                components.Add(weaponComp);
+                ActivateComponent(weaponComp);
             }
         }
+    }
+
+    void ActivateComponent(WeaponComponent newComponent)
+    {
+        newComponent.Activate();
+        components.Add(newComponent);
+        OnNewComponent?.Invoke(newComponent);
+    }
+
+    public T AccessComponent<T>() where T : WeaponComponent
+    {
+        return GetComponentInChildren<T>();
     }
 
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Mouse0))
-            OnStartShooting?.Invoke();
+            OnStartShootingLeft?.Invoke();
         if(Input.GetKeyUp(KeyCode.Mouse0))
-            OnStopShooting?.Invoke();
+            OnStopShootingLeft?.Invoke();
+
+        if(Input.GetKeyDown(KeyCode.Mouse1))
+            OnStartShootingRight?.Invoke();
+        if( Input.GetKeyUp(KeyCode.Mouse1))
+            OnStopShootingRight?.Invoke();
 
         if(Input.GetKeyDown(KeyCode.R))
             OnReload.Invoke();

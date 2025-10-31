@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WC_Barrel : WeaponComponent
 {
-    #region events
+    #region Events
     public event Action OnShoot;
     public event Action OnStartShooting;
     public event Action OnStopShooting;
@@ -23,16 +23,16 @@ public class WC_Barrel : WeaponComponent
     {
         base.Activate();
 
-        core.OnStartShooting.AddListener(StartShooting);
-        core.OnStopShooting.AddListener(StopShooting);
+        core.OnStartShootingLeft += StartShooting;
+        core.OnStopShootingLeft += StopShooting;
     }
 
     public override void Deactivate()
     {
         base.Deactivate();
 
-        core.OnStartShooting.RemoveListener(StartShooting);
-        core.OnStopShooting.RemoveListener(StopShooting);
+        core.OnStartShootingLeft -= StartShooting;
+        core.OnStopShootingLeft -= StopShooting;
     }
 
     public virtual async void StartShooting()

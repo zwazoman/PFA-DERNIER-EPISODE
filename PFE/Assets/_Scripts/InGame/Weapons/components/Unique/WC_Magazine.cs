@@ -1,7 +1,15 @@
+using System;
 using UnityEngine;
 
-public class WC_Magazine : UniqueWeaponComponent
+public class WC_Magazine : WeaponComponent
 {
+    #region Events
+    public event Action OnConsumeAmmo;
+    public event Action OnReload;
+    public event Action OnEmpty;
+
+    #endregion
+
     [SerializeField] int _ammoCapacity;
     [SerializeField] string _reloadAnimationTriggerName;
 
@@ -10,7 +18,7 @@ public class WC_Magazine : UniqueWeaponComponent
     public override void Activate()
     {
         _currentAmmo = _ammoCapacity;
-        core.OnReload.AddListener(Reload);
+        core.OnReload += Reload;
         //core.OnShoot.AddListener(ConsumeAmmo);
     }
 
@@ -23,8 +31,11 @@ public class WC_Magazine : UniqueWeaponComponent
     void ConsumeAmmo()
     {
         _currentAmmo--;
-    }
-    
 
+        if(_currentAmmo <= 0)
+        {
+            OnEmpty?.Invoke();
+        }
+    }
     //faut gérer le UI et les feedbacks aussi
 }
