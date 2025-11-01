@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using System;
+using UnityEngine.Events;
 
 public class Core : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class Core : MonoBehaviour
     public event Action OnStartShooting;
     public event Action OnStopShooting;
     public event Action OnDelay;
+
+    public CoreEvent ShootEvent;
 
     #endregion
 
@@ -32,18 +35,14 @@ public class Core : MonoBehaviour
     //Magazine handle
     protected int currentAmmoCount;
 
-    public void Activate()
+    public virtual void Activate()
     {
-        transform.parent.TryGetComponent<WeaponHandler>(out _handler);
 
-        _handler.OnStartShootingLeft += StartShooting;
-        _handler.OnStopShootingLeft += StopShooting;
     }
 
-    public void Deactivate()
+    public virtual void Deactivate()
     {
-        _handler.OnStartShootingLeft -= StartShooting;
-        _handler.OnStopShootingLeft -= StopShooting;
+
     }
 
     public virtual async void StartShooting()
@@ -71,19 +70,29 @@ public class Core : MonoBehaviour
         }
     }
 
+    public virtual void StopShooting()
+    {
+        OnStopShooting?.Invoke();
+
+        isShooting = false;
+    }
+
+    public async virtual void Reload()
+    {
+        canShoot = false;
+        await HandleDelay(reloadTimeTest);
+
+        currentAmmoCount = maxAmmoCount;
+
+        canShoot = true;
+    }
+
     protected virtual void Shoot()
     {
         OnShoot?.Invoke();
 
         Instantiate(projectilePrefab, _shootSocket.transform.position, _shootSocket.transform.rotation);
         currentAmmoCount--;
-    }
-
-    public virtual void StopShooting()
-    {
-        OnStopShooting?.Invoke();
-
-        isShooting = false;
     }
 
     protected virtual async UniTask HandleDelay(float delay)
@@ -95,13 +104,13 @@ public class Core : MonoBehaviour
         canShoot = true;
     }
 
-    protected async virtual void Reload()
-    {
-        canShoot = false;
-        await HandleDelay(reloadTimeTest);
 
-        currentAmmoCount = maxAmmoCount;
+}
 
-        canShoot = true;
-    }
+[Serializable]
+public struct CoreEvent
+{
+    public UnityEvent Event;
+    public string Name;
+    public int Slots;
 }
