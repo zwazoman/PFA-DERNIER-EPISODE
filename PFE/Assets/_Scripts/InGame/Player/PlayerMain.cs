@@ -2,15 +2,25 @@ using UnityEngine;
 
 public class PlayerMain : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [Header("Objects")]
+    [field : SerializeField] 
+    public Camera playerCamera { get; private set; }
 
-    // Update is called once per frame
-    void Update()
+
+    [Header("Scripts")]
+    [field : SerializeField]
+    public PlayerMovement playerMovement { get; private set; }
+
+    [field : SerializeField]
+    public PlayerWeaponHandler playerWeaponHandler { get; private set; }
+
+    [field: SerializeField]
+    public PlayerInteraction playerInteraction { get; private set; }
+
+    private void Start()
     {
-        
+        playerMovement.main = this;
+        playerWeaponHandler.main = this;
+        playerInteraction.main = this;
     }
 }

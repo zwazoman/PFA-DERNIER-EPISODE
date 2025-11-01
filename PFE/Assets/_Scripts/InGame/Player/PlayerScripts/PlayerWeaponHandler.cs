@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class WeaponHandler : MonoBehaviour
+public class PlayerWeaponHandler : PlayerScript
 {
     [HideInInspector] public Core LeftWeaponCore;
     [HideInInspector] public Core RightWeaponCore;

@@ -3,6 +3,7 @@ using UnityEngine;
 using System;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(CoreEventCenter))]
 public class Core : MonoBehaviour
 {
     #region Events mais faut en faire des objets là
@@ -17,7 +18,7 @@ public class Core : MonoBehaviour
 
     [Header("References")]
     [SerializeField] Transform _shootSocket;
-    WeaponHandler _handler;
+    [SerializeField] CoreEventCenter _eventCenter;
 
     [Header("Shooting Parameters")]
     [SerializeField] protected float rateOfFire;
@@ -35,15 +36,14 @@ public class Core : MonoBehaviour
     //Magazine handle
     protected int currentAmmoCount;
 
-    public virtual void Activate()
+    private void Awake()
     {
-
+        TryGetComponent(out _eventCenter);
     }
 
-    public virtual void Deactivate()
-    {
+    public virtual void Activate() { }
 
-    }
+    public virtual void Deactivate() { }
 
     public virtual async void StartShooting()
     {
@@ -103,14 +103,4 @@ public class Core : MonoBehaviour
         await UniTask.WaitForSeconds(delay);
         canShoot = true;
     }
-
-
-}
-
-[Serializable]
-public struct CoreEvent
-{
-    public UnityEvent Event;
-    public string Name;
-    public int Slots;
 }
