@@ -1,17 +1,23 @@
+using AYellowpaper.SerializedCollections;
 using System;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Rendering;
 
 public class CoreEventCenter : MonoBehaviour
 {
-    [SerializeField] public SerializedDictionary<string, CoreEvent> coreEvents = new();
+    [SerializedDictionary("Name", "CoreEvent")]
+    public SerializedDictionary<string, CoreEvent> coreEvents = new();
 
-    public void InvokeEvent(string eventName)
+    public void InvokeEvent(string eventName, bool createEvent = false)
     {
         if(coreEvents.ContainsKey(eventName))
         {
             coreEvents[eventName].Event?.Invoke();
+        }
+        else if(createEvent)
+        {
+            CoreEvent coreEvent = new();
+            coreEvents.Add(eventName, coreEvent);
         }
     }
 
@@ -23,6 +29,7 @@ public class CoreEventCenter : MonoBehaviour
         }
     }
 }
+
 
 [Serializable]
 public struct CoreEvent
