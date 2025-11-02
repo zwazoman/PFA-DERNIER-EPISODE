@@ -44,13 +44,11 @@ public class PlayerInteraction : PlayerScript
         {
             if(_currentInteractable != null)
             {
-                if(_currentInteractable is CorePickup)
+                if(_currentInteractable is Pickup)
                 {
-                    CorePickup pickup = _currentInteractable as CorePickup;
+                    Pickup pickup = _currentInteractable as Pickup;
                     _currentPickup = pickup;
-                    pickup.OnPickup();
-
-                    main.playerWeaponHandler.LinkCore(pickup.core);
+                    pickup.OnPickup(this);
                 }
                 else
                     _currentInteractable.Interact();

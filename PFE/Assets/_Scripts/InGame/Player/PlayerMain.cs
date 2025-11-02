@@ -6,7 +6,6 @@ public class PlayerMain : MonoBehaviour
     [field : SerializeField] 
     public Camera playerCamera { get; private set; }
 
-
     [Header("Scripts")]
     [field : SerializeField]
     public PlayerMovement playerMovement { get; private set; }

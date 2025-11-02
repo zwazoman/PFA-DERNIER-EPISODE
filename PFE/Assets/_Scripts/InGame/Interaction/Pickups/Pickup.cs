@@ -5,11 +5,9 @@ public class Pickup : Interactable
     public override void Interact()
     {
         base.Interact();
-        
-        OnPickup();
     }
 
-    public virtual void OnPickup()
+    public virtual void OnPickup(PlayerInteraction interaction)
     {
         //désactive gravité collisions etc
 

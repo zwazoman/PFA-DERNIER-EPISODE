@@ -49,8 +49,8 @@ MonoBehaviour:
   main: {fileID: 4980462916316551048}
   LeftWeaponCore: {fileID: 0}
   RightWeaponCore: {fileID: 0}
-  _leftCoreSocket: {fileID: 0}
-  _rightCoreSocket: {fileID: 0}
+  _leftCoreSocket: {fileID: 861727263198353047}
+  _rightCoreSocket: {fileID: 4084573382868105717}
   _reloadHoldWindow: 0.5
 --- !u!1 &596245385459315648
 GameObject:
@@ -211,6 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ada600c3d02c754085e5103ec553285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <playerCamera>k__BackingField: {fileID: 0}
   <playerMovement>k__BackingField: {fileID: 3587789608084386626}
   <playerWeaponHandler>k__BackingField: {fileID: 489298053857041524}
   <playerInteraction>k__BackingField: {fileID: 782015612443783242}
@@ -240,6 +241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   main: {fileID: 4980462916316551048}
+  _interactReach: 5
 --- !u!114 &4170635588787197566
 MonoBehaviour:
   m_ObjectHideFlags: 0
