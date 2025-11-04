@@ -2,9 +2,11 @@ using UnityEngine;
 
 public class Pickup : Interactable
 {
-    public override void Interact()
+    public override void Interact(PlayerInteraction interaction)
     {
-        base.Interact();
+        base.Interact(interaction);
+
+        OnPickup(interaction);
     }
 
     public virtual void OnPickup(PlayerInteraction interaction)

@@ -12,7 +12,11 @@ public class PlayerInteraction : PlayerScript
     private void Update()
     {
         RaycastHit hit;
-        Physics.Raycast(main.playerCamera.transform.position, main.playerCamera.transform.forward, out hit, _interactReach);
+
+        if (!Physics.Raycast(main.playerCamera.transform.position, main.playerCamera.transform.forward, out hit, _interactReach))
+            return;
+
+        print(hit.collider.gameObject.name);
 
         Interactable interactable;
         if (hit.collider.gameObject.TryGetComponent(out interactable))
@@ -44,15 +48,13 @@ public class PlayerInteraction : PlayerScript
         {
             if(_currentInteractable != null)
             {
-                if(_currentInteractable is Pickup)
-                {
-                    Pickup pickup = _currentInteractable as Pickup;
-                    _currentPickup = pickup;
-                    pickup.OnPickup(this);
-                }
-                else
-                    _currentInteractable.Interact();
+                _currentInteractable.Interact(this);
             }
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(main.playerCamera.transform.position, main.playerCamera.transform.forward * _interactReach);
     }
 }
