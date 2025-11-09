@@ -6,6 +6,7 @@ public class WC : MonoBehaviour
 
     [SerializeField] int cost;
     [SerializeField] int rarity;
+    [SerializeField] WCTypes _types;
 
     public virtual void Activate() { }
     public virtual void Deactivate() { }

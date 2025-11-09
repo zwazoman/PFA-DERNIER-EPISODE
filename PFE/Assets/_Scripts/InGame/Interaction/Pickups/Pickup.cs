@@ -9,10 +9,11 @@ public class Pickup : Interactable
         OnPickup(interaction);
     }
 
-    public virtual void OnPickup(PlayerInteraction interaction)
+    protected virtual void OnPickup(PlayerInteraction interaction)
     {
         //désactive gravité collisions etc
 
+        print("picked up");
         isInteractable = false;
         StopHover();
     }
@@ -22,7 +23,6 @@ public class Pickup : Interactable
         //réactive tout
 
         transform.parent = null;
-
         isInteractable = true;
     }
 }

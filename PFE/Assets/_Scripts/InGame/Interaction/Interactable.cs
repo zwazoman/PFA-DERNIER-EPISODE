@@ -3,24 +3,38 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
     [HideInInspector] public bool isInteractable = true;
+    [SerializeField] Material _hoveredMaterial;
+
+    MeshRenderer _mR;
+    Material _initialMaterial;
+
+    protected virtual void Awake()
+    {
+        TryGetComponent(out _mR);
+        _initialMaterial = _mR.material;
+
+        if(gameObject.layer != 6)
+            gameObject.layer = 6;
+    }
 
     public virtual void Interact(PlayerInteraction interaction)
     {
-        if (!isInteractable)
-            return;
+        print(gameObject.name + " interact !");
     }
 
     public virtual void StartHover()
     {
-        if (!isInteractable)
-            return;
+        //feedback
 
-        print(gameObject.name + " is hovered");
+        if(_hoveredMaterial != null)
+            _mR.material = _hoveredMaterial;
     }
 
     public virtual void StopHover()
     {
-        print(gameObject.name + " is not hovered");
+        //feedback
+
+        _mR.material = _initialMaterial;
     }
 
     //gérer feedback

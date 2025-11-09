@@ -5,6 +5,7 @@ public class PlayerInteraction : PlayerScript
 {
     [Header("Parameters")]
     [SerializeField] float _interactReach = 5;
+    [SerializeField] LayerMask _interactMask;
 
     Interactable _currentInteractable;
     Pickup _currentPickup;
@@ -13,13 +14,18 @@ public class PlayerInteraction : PlayerScript
     {
         RaycastHit hit;
 
-        if (!Physics.Raycast(main.playerCamera.transform.position, main.playerCamera.transform.forward, out hit, _interactReach))
+        if (!Physics.Raycast(main.playerCamera.transform.position, main.playerCamera.transform.forward, out hit, _interactReach, _interactMask))
+        {
+            if (_currentInteractable != null)
+            {
+                _currentInteractable.StopHover();
+                _currentInteractable = null;
+            }
             return;
-
-        print(hit.collider.gameObject.name);
+        }
 
         Interactable interactable;
-        if (hit.collider.gameObject.TryGetComponent(out interactable))
+        if (hit.collider.gameObject.TryGetComponent(out interactable) && interactable.isInteractable)
         {
             if (interactable == _currentInteractable)
                 return;
@@ -55,6 +61,6 @@ public class PlayerInteraction : PlayerScript
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawLine(main.playerCamera.transform.position, main.playerCamera.transform.forward * _interactReach);
+        Gizmos.DrawLine(main.playerCamera.transform.position, main.playerCamera.transform.position + main.playerCamera.transform.forward * _interactReach);
     }
 }

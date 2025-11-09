@@ -1,11 +1,14 @@
 using UnityEngine;
 
-public class WCPickup : MonoBehaviour
+[RequireComponent(typeof(WC))]
+public class WCPickup : Pickup
 {
     [SerializeField] public WC weaponComponent;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         TryGetComponent(out weaponComponent);
     }
 }

@@ -37,20 +37,25 @@ public class PlayerWeaponHandler : PlayerScript
     }
 
 
-    public void LinkCore(Core newCore)
+    public bool LinkCore(Core newCore)
     {
         if (LeftWeaponCore == null)
         {
             LeftWeaponCore = newCore;
             PositionCore(_leftCoreSocket, newCore);
+            return true;
         }
         else if (RightWeaponCore == null)
         {
             RightWeaponCore = newCore;
             PositionCore(_rightCoreSocket, newCore);
+            return true;
         }
         else
+        {
             print("plus de place la team");
+            return false;
+        }
     }
 
     void PositionCore(Transform socket, Core core)
