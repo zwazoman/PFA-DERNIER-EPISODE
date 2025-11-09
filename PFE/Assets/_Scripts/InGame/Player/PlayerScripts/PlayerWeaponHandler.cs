@@ -1,10 +1,18 @@
+using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerWeaponHandler : PlayerScript
 {
+    #region Events
+
+    public event Action<Core,Core> OnCoreLink;
+
+    #endregion
+
     [HideInInspector] public Core LeftWeaponCore;
     [HideInInspector] public Core RightWeaponCore;
 
@@ -37,25 +45,28 @@ public class PlayerWeaponHandler : PlayerScript
     }
 
 
-    public bool LinkCore(Core newCore)
+    public async UniTask<bool> LinkCore(Core newCore)
     {
         if (LeftWeaponCore == null)
         {
             LeftWeaponCore = newCore;
             PositionCore(_leftCoreSocket, newCore);
-            return true;
         }
         else if (RightWeaponCore == null)
         {
             RightWeaponCore = newCore;
             PositionCore(_rightCoreSocket, newCore);
-            return true;
         }
         else
         {
             print("plus de place la team");
-            return false;
+            bool coreChanged = await main.uiMain.weaponMenu.OpenCoreChoiceMenu();
+            if (!coreChanged)
+                return false;
         }
+
+        OnCoreLink?.Invoke(LeftWeaponCore,RightWeaponCore);
+        return true;
     }
 
     void PositionCore(Transform socket, Core core)

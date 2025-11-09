@@ -11,15 +11,15 @@ public class Core : MonoBehaviour
     public event Action OnStartShooting;
     public event Action OnStopShooting;
     public event Action OnDelay;
-
-    public CoreEvent ShootEvent;
-
     #endregion
 
-    [Header("References")]
-    [SerializeField] Transform _shootSocket;
-    [SerializeField] CoreEventCenter _eventCenter;
+    [Header("Public References")]
+    [SerializeField] public CoreEventCenter eventCenter;
+    [SerializeField] public CoreTypeInfo coreData;
 
+    [Header("Private References")]
+    [SerializeField] Transform _shootSocket;
+    
     [Header("Shooting Parameters")]
     [SerializeField] protected float rateOfFire;
     [SerializeField] protected float fireDelay;
@@ -38,7 +38,7 @@ public class Core : MonoBehaviour
 
     private void Awake()
     {
-        TryGetComponent(out _eventCenter);
+        TryGetComponent(out eventCenter);
     }
 
     public virtual void Activate() { }
