@@ -1,10 +1,14 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMain : MonoBehaviour
 {
     [Header("Objects")]
     [field : SerializeField] 
     public Camera playerCamera { get; private set; }
+
+    [field : SerializeField]
+    public PlayerInput playerInput { get; private set; }
 
     [Header("Scripts")]
     [field : SerializeField]
@@ -25,5 +29,21 @@ public class PlayerMain : MonoBehaviour
         playerWeaponHandler.main = this;
         playerInteraction.main = this;
         uiMain.main = this;
+
+        SwapActionMapToUI();
+    }
+
+    public void SwapActionMapToUI()
+    {
+        playerInput.currentActionMap.Disable();
+        playerInput.SwitchCurrentActionMap("UI");
+        playerInput.currentActionMap.Enable();
+    }
+
+    public void SwapActionMapToPlayer()
+    {
+        playerInput.currentActionMap.Disable();
+        playerInput.SwitchCurrentActionMap("Player");
+        playerInput.currentActionMap.Enable();
     }
 }
