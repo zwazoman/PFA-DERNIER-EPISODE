@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Core))]
+
 public class CorePickup : Pickup
 {
     [SerializeField] public Core core;

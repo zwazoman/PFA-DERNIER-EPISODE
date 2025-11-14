@@ -33,11 +33,11 @@ public class PlayerWeaponHandler : PlayerScript
     {
         LinkExistingCores();
 
-        if(leftWeaponCore != null)
-            leftWeaponCore.Activate();
+        if (leftWeaponCore != null)
+            leftWeaponCore.Equip(this); ;
 
-        if(rightWeaponCore != null) 
-            rightWeaponCore.Activate();
+        if (rightWeaponCore != null)
+            rightWeaponCore.Equip(this);
     }
 
     void LinkExistingCores()
@@ -49,26 +49,6 @@ public class PlayerWeaponHandler : PlayerScript
 
     public async UniTask<bool> LinkCore(Core newCore)
     {
-        //laisser uniquement le choice
-
-        //if (leftWeaponCore == null)
-        //{
-        //    leftWeaponCore = newCore;
-        //    PositionCore(_leftCoreSocket, newCore);
-        //}
-        //else if (rightWeaponCore == null)
-        //{
-        //    rightWeaponCore = newCore;
-        //    PositionCore(_rightCoreSocket, newCore);
-        //}
-        //else
-        //{
-        //    print("plus de place la team");
-        //    bool coreChanged = await main.uiMain.weaponMenu.OpenCoreChoiceMenu(newCore);
-        //    if (!coreChanged)
-        //        return false;
-        //}
-
         return await main.uiMain.weaponMenu.OpenCoreChoiceMenu(newCore);
     }
 
@@ -76,10 +56,11 @@ public class PlayerWeaponHandler : PlayerScript
     {
         if (leftWeaponCore != null)
         {
-            leftWeaponCore.pickup.Drop();
+            leftWeaponCore.UnEquip();
         }
 
         leftWeaponCore = newCore;
+        leftWeaponCore.Equip(this);
         PositionCore(_leftCoreSocket, newCore);
 
         OnCoreLink?.Invoke(leftWeaponCore, rightWeaponCore);
@@ -89,10 +70,11 @@ public class PlayerWeaponHandler : PlayerScript
     {
         if(rightWeaponCore != null)
         {
-            rightWeaponCore.pickup.Drop();
+            rightWeaponCore.UnEquip();
         }
 
         rightWeaponCore = newCore;
+        rightWeaponCore.Equip(this);
         PositionCore(_rightCoreSocket, newCore);
 
         OnCoreLink?.Invoke(leftWeaponCore, rightWeaponCore);
@@ -113,9 +95,9 @@ public class PlayerWeaponHandler : PlayerScript
             return;
 
         if (ctx.started)
-            leftWeaponCore.StartShooting();
+            leftWeaponCore.StartShootTrigger();
         else if(ctx.canceled)
-            leftWeaponCore.StopShooting();
+            leftWeaponCore.StopShootTrigger();
 
         _lastUsedCore = leftWeaponCore;
     }
@@ -126,9 +108,9 @@ public class PlayerWeaponHandler : PlayerScript
             return;
 
         if (ctx.started)
-            rightWeaponCore.StartShooting();
+            rightWeaponCore.StartShootTrigger();
         else if (ctx.canceled)
-            rightWeaponCore.StopShooting();
+            rightWeaponCore.StopShootTrigger();
 
         _lastUsedCore = rightWeaponCore;
     }
@@ -143,7 +125,7 @@ public class PlayerWeaponHandler : PlayerScript
             if (_lastUsedCore == null)
                 ChooseReload();
             else
-                _lastUsedCore.Reload();
+                _lastUsedCore.ReloadTrigger();
         }
         else
             ChooseReload();

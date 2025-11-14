@@ -130,9 +130,9 @@ GameObject:
   - component: {fileID: 218178063}
   - component: {fileID: 218178062}
   - component: {fileID: 218178061}
-  - component: {fileID: 218178060}
+  - component: {fileID: 218178064}
+  - component: {fileID: 218178065}
   - component: {fileID: 218178059}
-  - component: {fileID: 218178058}
   - component: {fileID: 218178057}
   m_Layer: 0
   m_Name: Grappin
@@ -154,27 +154,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coreEvents: []
---- !u!114 &218178058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 218178056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 652f1acd208221c49aa3c44e7c8e7f86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pickup: {fileID: 218178059}
-  eventCenter: {fileID: 218178057}
-  coreData: {fileID: 11400000, guid: f7c6b877eb6a0fc42a465ad552f5562b, type: 2}
-  _shootSocket: {fileID: 0}
-  rateOfFire: 0
-  fireDelay: 0
-  projectilePrefab: {fileID: 0}
-  maxAmmoCount: 0
-  reloadTimeTest: 1
 --- !u!114 &218178059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,28 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInteractable: 1
   _hoveredMaterial: {fileID: 2100000, guid: be4843c97f844a24aa319cad41fac0db, type: 2}
-  core: {fileID: 218178058}
---- !u!65 &218178060
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 218178056}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  core: {fileID: 218178065}
 --- !u!23 &218178061
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -263,7 +221,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 218178056}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &218178063
 Transform:
   m_ObjectHideFlags: 0
@@ -279,6 +237,48 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &218178064
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218178056}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &218178065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218178056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b6df35394122584dad7a6e3a718e2fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickup: {fileID: 0}
+  eventCenter: {fileID: 0}
+  coreData: {fileID: 0}
+  _shootSocket: {fileID: 0}
+  rateOfFire: 0
+  fireDelay: 0
+  projectilePrefab: {fileID: 0}
+  maxAmmoCount: 0
+  reloadTimeTest: 1
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,8 +412,8 @@ GameObject:
   - component: {fileID: 542395136}
   - component: {fileID: 542395135}
   - component: {fileID: 542395134}
+  - component: {fileID: 542395140}
   - component: {fileID: 542395139}
-  - component: {fileID: 542395133}
   - component: {fileID: 542395138}
   m_Layer: 0
   m_Name: Glock
@@ -422,27 +422,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &542395133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 542395132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 652f1acd208221c49aa3c44e7c8e7f86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pickup: {fileID: 542395139}
-  eventCenter: {fileID: 542395138}
-  coreData: {fileID: 11400000, guid: ae87319924de7d443914e94f0f833e8e, type: 2}
-  _shootSocket: {fileID: 0}
-  rateOfFire: 0
-  fireDelay: 0
-  projectilePrefab: {fileID: 0}
-  maxAmmoCount: 0
-  reloadTimeTest: 1
 --- !u!65 &542395134
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -559,7 +538,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInteractable: 1
   _hoveredMaterial: {fileID: 2100000, guid: be4843c97f844a24aa319cad41fac0db, type: 2}
-  core: {fileID: 542395133}
+  core: {fileID: 542395140}
+--- !u!114 &542395140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 542395132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d07e636773fb32a4eb66e8187c35b6ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickup: {fileID: 0}
+  eventCenter: {fileID: 0}
+  coreData: {fileID: 0}
+  _shootSocket: {fileID: 0}
+  rateOfFire: 0
+  fireDelay: 0
+  projectilePrefab: {fileID: 0}
+  maxAmmoCount: 0
+  reloadTimeTest: 1
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -745,8 +745,8 @@ GameObject:
   - component: {fileID: 950873949}
   - component: {fileID: 950873948}
   - component: {fileID: 950873947}
+  - component: {fileID: 950873951}
   - component: {fileID: 950873946}
-  - component: {fileID: 950873945}
   - component: {fileID: 950873944}
   m_Layer: 0
   m_Name: Snipe
@@ -768,27 +768,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coreEvents: []
---- !u!114 &950873945
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 950873943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 652f1acd208221c49aa3c44e7c8e7f86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pickup: {fileID: 950873946}
-  eventCenter: {fileID: 950873944}
-  coreData: {fileID: 11400000, guid: 9ab8d4fc9440b974e9244e5827826959, type: 2}
-  _shootSocket: {fileID: 0}
-  rateOfFire: 0
-  fireDelay: 0
-  projectilePrefab: {fileID: 0}
-  maxAmmoCount: 0
-  reloadTimeTest: 1
 --- !u!114 &950873946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -803,7 +782,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInteractable: 1
   _hoveredMaterial: {fileID: 2100000, guid: be4843c97f844a24aa319cad41fac0db, type: 2}
-  core: {fileID: 950873945}
+  core: {fileID: 950873951}
 --- !u!65 &950873947
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -888,11 +867,32 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 9.22, y: 1.67, z: -1.4}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.64707}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &950873951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950873943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddc4e52ba940e404dbdf54f5681cecef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickup: {fileID: 0}
+  eventCenter: {fileID: 0}
+  coreData: {fileID: 0}
+  _shootSocket: {fileID: 0}
+  rateOfFire: 0
+  fireDelay: 0
+  projectilePrefab: {fileID: 0}
+  maxAmmoCount: 0
+  reloadTimeTest: 1
 --- !u!1 &1185258716
 GameObject:
   m_ObjectHideFlags: 0

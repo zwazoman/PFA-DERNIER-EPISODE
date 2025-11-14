@@ -1,26 +1,11 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using System;
-using UnityEngine.Events;
 
-[RequireComponent(typeof(CoreEventCenter))]
-public class Core : MonoBehaviour
+public class ClassicCore : Core
 {
-    #region Events mais faut en faire des objets là
-    public event Action OnShoot;
-    public event Action OnStartShooting;
-    public event Action OnStopShooting;
-    public event Action OnDelay;
-    #endregion
-
-    [Header("Public References")]
-    [SerializeField] public CorePickup pickup;
-    [SerializeField] public CoreEventCenter eventCenter;
-    [SerializeField] public CoreTypeInfo coreData;
-
     [Header("Private References")]
     [SerializeField] Transform _shootSocket;
-    
+
     [Header("Shooting Parameters")]
     [SerializeField] protected float rateOfFire;
     [SerializeField] protected float fireDelay;
@@ -43,14 +28,24 @@ public class Core : MonoBehaviour
         TryGetComponent(out pickup);
     }
 
-    public virtual void Activate() { }
+    public override void Equip(PlayerWeaponHandler weaponHandler)
+    {
+        base.Equip(weaponHandler);
+    }
 
-    public virtual void Deactivate() { }
+    public override void UnEquip()
+    {
+        base.UnEquip();
+    }
+
+    public override void StartShootTrigger() => StartShooting();
+
+    public override void StopShootTrigger() => StopShooting();
+
+    public override void ReloadTrigger() => Reload();
 
     public virtual async void StartShooting()
     {
-        OnStartShooting?.Invoke();
-
         isShooting = true;
         while (isShooting)
         {
@@ -74,8 +69,6 @@ public class Core : MonoBehaviour
 
     public virtual void StopShooting()
     {
-        OnStopShooting?.Invoke();
-
         isShooting = false;
     }
 
@@ -91,16 +84,12 @@ public class Core : MonoBehaviour
 
     protected virtual void Shoot()
     {
-        OnShoot?.Invoke();
-
         Instantiate(projectilePrefab, _shootSocket.transform.position, _shootSocket.transform.rotation);
         currentAmmoCount--;
     }
 
     protected virtual async UniTask HandleDelay(float delay)
     {
-        OnDelay?.Invoke();
-
         canShoot = false;
         await UniTask.WaitForSeconds(delay);
         canShoot = true;

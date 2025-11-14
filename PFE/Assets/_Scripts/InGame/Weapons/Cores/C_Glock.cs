@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class WC_Lever : MonoBehaviour
+public class C_Glock : ClassicCore
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
