@@ -3,9 +3,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System;
 
 public class CoreUi : MonoBehaviour
 {
+    public event Action OnClicked;
+
     [HideInInspector] public Core core;
 
     [Header("References")]
@@ -13,7 +16,7 @@ public class CoreUi : MonoBehaviour
     [SerializeField] Image _coreImage;
     [SerializeField] List<CoreEventUI> coreEventUis = new();
 
-    public void SwapCores(Core newCore)
+    public void SwapCore(Core newCore)
     {
         core = newCore;
 
@@ -24,5 +27,10 @@ public class CoreUi : MonoBehaviour
         {
             coreEventUis[i].EditEvent(core.eventCenter.coreEvents[i]);
         }
+    }
+
+    public void Click()
+    {
+        OnClicked?.Invoke();
     }
 }

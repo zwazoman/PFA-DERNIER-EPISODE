@@ -12,13 +12,13 @@ public class CorePickup : Pickup
         TryGetComponent(out core);
     }
 
-    protected override async void OnPickup(PlayerInteraction interaction)
+    protected override async void TryPickup(PlayerInteraction interaction)
     {
         bool coreLinked = await interaction.main.playerWeaponHandler.LinkCore(core);
 
         if (coreLinked)
         {
-            base.OnPickup(interaction);
+            base.TryPickup(interaction);
         }
     }
 }

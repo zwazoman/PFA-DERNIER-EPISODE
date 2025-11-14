@@ -13,8 +13,10 @@ public class PlayerWeaponHandler : PlayerScript
 
     #endregion
 
-    [HideInInspector] public Core LeftWeaponCore;
-    [HideInInspector] public Core RightWeaponCore;
+    [HideInInspector] public Core leftWeaponCore;
+    [HideInInspector] public Core rightWeaponCore;
+
+    [HideInInspector] public bool canUseCores = true;
 
     Core _lastUsedCore;
 
@@ -31,42 +33,69 @@ public class PlayerWeaponHandler : PlayerScript
     {
         LinkExistingCores();
 
-        if(LeftWeaponCore != null)
-            LeftWeaponCore.Activate();
+        if(leftWeaponCore != null)
+            leftWeaponCore.Activate();
 
-        if(RightWeaponCore != null) 
-            RightWeaponCore.Activate();
+        if(rightWeaponCore != null) 
+            rightWeaponCore.Activate();
     }
 
     void LinkExistingCores()
     {
-        LeftWeaponCore = _leftCoreSocket.GetComponentInChildren<Core>();
-        RightWeaponCore = _rightCoreSocket.GetComponentInChildren<Core>();
+        leftWeaponCore = _leftCoreSocket.GetComponentInChildren<Core>();
+        rightWeaponCore = _rightCoreSocket.GetComponentInChildren<Core>();
     }
 
 
     public async UniTask<bool> LinkCore(Core newCore)
     {
-        if (LeftWeaponCore == null)
+        //laisser uniquement le choice
+
+        //if (leftWeaponCore == null)
+        //{
+        //    leftWeaponCore = newCore;
+        //    PositionCore(_leftCoreSocket, newCore);
+        //}
+        //else if (rightWeaponCore == null)
+        //{
+        //    rightWeaponCore = newCore;
+        //    PositionCore(_rightCoreSocket, newCore);
+        //}
+        //else
+        //{
+        //    print("plus de place la team");
+        //    bool coreChanged = await main.uiMain.weaponMenu.OpenCoreChoiceMenu(newCore);
+        //    if (!coreChanged)
+        //        return false;
+        //}
+
+        return await main.uiMain.weaponMenu.OpenCoreChoiceMenu(newCore);
+    }
+
+    public void SwapLeftCore(Core newCore)
+    {
+        if (leftWeaponCore != null)
         {
-            LeftWeaponCore = newCore;
-            PositionCore(_leftCoreSocket, newCore);
-        }
-        else if (RightWeaponCore == null)
-        {
-            RightWeaponCore = newCore;
-            PositionCore(_rightCoreSocket, newCore);
-        }
-        else
-        {
-            print("plus de place la team");
-            bool coreChanged = await main.uiMain.weaponMenu.OpenCoreChoiceMenu();
-            if (!coreChanged)
-                return false;
+            leftWeaponCore.pickup.Drop();
         }
 
-        OnCoreLink?.Invoke(LeftWeaponCore,RightWeaponCore);
-        return true;
+        leftWeaponCore = newCore;
+        PositionCore(_leftCoreSocket, newCore);
+
+        OnCoreLink?.Invoke(leftWeaponCore, rightWeaponCore);
+    }
+
+    public void SwapRightCore(Core newCore)
+    {
+        if(rightWeaponCore != null)
+        {
+            rightWeaponCore.pickup.Drop();
+        }
+
+        rightWeaponCore = newCore;
+        PositionCore(_rightCoreSocket, newCore);
+
+        OnCoreLink?.Invoke(leftWeaponCore, rightWeaponCore);
     }
 
     void PositionCore(Transform socket, Core core)
@@ -76,48 +105,39 @@ public class PlayerWeaponHandler : PlayerScript
         core.transform.rotation = socket.rotation;
     }
 
-    public void UnlinkLeftCore()
-    {
-        LeftWeaponCore.transform.parent = null;
-        LeftWeaponCore = null;
-    }
-
-    public void UnlinkRightCore()
-    {
-        RightWeaponCore.transform.parent = null;
-        RightWeaponCore = null;
-    }
-
     #region Inputs
 
     public void HandleLeftCoreInputs(InputAction.CallbackContext ctx)
     {
-        if (LeftWeaponCore == null)
+        if (leftWeaponCore == null || !main.CheckActionmap(ctx.action.actionMap) || !canUseCores)
             return;
 
         if (ctx.started)
-            LeftWeaponCore.StartShooting();
+            leftWeaponCore.StartShooting();
         else if(ctx.canceled)
-            LeftWeaponCore.StopShooting();
+            leftWeaponCore.StopShooting();
 
-        _lastUsedCore = LeftWeaponCore;
+        _lastUsedCore = leftWeaponCore;
     }
 
     public void HandleRightCoreInputs(InputAction.CallbackContext ctx)
     {
-        if (RightWeaponCore == null)
+        if (rightWeaponCore == null || !main.CheckActionmap(ctx.action.actionMap) || !canUseCores)
             return;
 
         if (ctx.started)
-            RightWeaponCore.StartShooting();
+            rightWeaponCore.StartShooting();
         else if (ctx.canceled)
-            RightWeaponCore.StopShooting();
+            rightWeaponCore.StopShooting();
 
-        _lastUsedCore = RightWeaponCore;
+        _lastUsedCore = rightWeaponCore;
     }
 
     public void Reload(InputAction.CallbackContext ctx)
     {
+        if (!main.CheckActionmap(ctx.action.actionMap) || (rightWeaponCore != null && leftWeaponCore != null) || !canUseCores)
+            return;
+
         if (_reloadTimer < _reloadHoldWindow)
         {
             if (_lastUsedCore == null)
@@ -137,10 +157,10 @@ public class PlayerWeaponHandler : PlayerScript
 
 
         //fenetre pour choisir quel core reload
-        if (_lastUsedCore == null)
-            ChooseReload();
-        else
-            _lastUsedCore.Reload();
+        //if (_lastUsedCore == null)
+        //    ChooseReload();
+        //else
+        //    _lastUsedCore.Reload();
         //tmp
     }
 

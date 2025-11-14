@@ -14,6 +14,7 @@ public class Core : MonoBehaviour
     #endregion
 
     [Header("Public References")]
+    [SerializeField] public CorePickup pickup;
     [SerializeField] public CoreEventCenter eventCenter;
     [SerializeField] public CoreTypeInfo coreData;
 
@@ -39,6 +40,7 @@ public class Core : MonoBehaviour
     private void Awake()
     {
         TryGetComponent(out eventCenter);
+        TryGetComponent(out pickup);
     }
 
     public virtual void Activate() { }

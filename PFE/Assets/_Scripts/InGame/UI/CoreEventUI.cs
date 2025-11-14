@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class CoreEventUI : MonoBehaviour
 {
+    CoreEvent _coreEvent;
+
     [SerializeField] TMP_Text _eventName;
     [SerializeField] Image _eventImage;
     [SerializeField] Image _WCImage;

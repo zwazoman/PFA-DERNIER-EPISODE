@@ -30,20 +30,29 @@ public class PlayerMain : MonoBehaviour
         playerInteraction.main = this;
         uiMain.main = this;
 
-        SwapActionMapToUI();
+        playerInput.currentActionMap.Disable();
+
+        //SwapActionMapToUI();
+    }
+
+    public bool CheckActionmap(InputActionMap actionMap)
+    {
+        if (actionMap == playerInput.currentActionMap)
+            return true;
+        return false;
     }
 
     public void SwapActionMapToUI()
     {
-        playerInput.currentActionMap.Disable();
+        Cursor.lockState = CursorLockMode.Confined;
+
         playerInput.SwitchCurrentActionMap("UI");
-        playerInput.currentActionMap.Enable();
     }
 
     public void SwapActionMapToPlayer()
     {
-        playerInput.currentActionMap.Disable();
+        Cursor.lockState = CursorLockMode.Locked;
+
         playerInput.SwitchCurrentActionMap("Player");
-        playerInput.currentActionMap.Enable();
     }
 }
