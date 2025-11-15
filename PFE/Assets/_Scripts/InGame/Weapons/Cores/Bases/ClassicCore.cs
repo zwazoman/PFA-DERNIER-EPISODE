@@ -22,12 +22,6 @@ public class ClassicCore : Core
     //Magazine handle
     protected int currentAmmoCount;
 
-    private void Awake()
-    {
-        TryGetComponent(out eventCenter);
-        TryGetComponent(out pickup);
-    }
-
     public override void Equip(PlayerWeaponHandler weaponHandler)
     {
         base.Equip(weaponHandler);

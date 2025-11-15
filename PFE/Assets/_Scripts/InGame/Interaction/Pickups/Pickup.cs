@@ -10,6 +10,17 @@ public class Pickup : Interactable
 
     #endregion
 
+    [SerializeField] Collider _coll;
+    [SerializeField] Rigidbody _rb;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        TryGetComponent(out _coll);
+        TryGetComponent(out _rb);
+    }
+
     public override void Interact(PlayerInteraction interaction)
     {
         base.Interact(interaction);
@@ -23,6 +34,8 @@ public class Pickup : Interactable
 
         print("picked up");
         isInteractable = false;
+        _coll.enabled = false;
+        _rb.isKinematic = true;
         StopHover();
 
         OnPickedUp?.Invoke();
@@ -34,6 +47,8 @@ public class Pickup : Interactable
 
         transform.parent = null;
         isInteractable = true;
+        _coll.enabled = true;
+        _rb.isKinematic = false;
         
         OnDropped?.Invoke();
     }

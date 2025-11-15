@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 4567589382139290474}
   - component: {fileID: 6398676133016957168}
   - component: {fileID: 3515866475187986926}
+  - component: {fileID: 3302010249135410653}
   - component: {fileID: 6262689001416837418}
   - component: {fileID: 5976778014079978446}
   - component: {fileID: 7222256855335559916}
-  - component: {fileID: 2194831780603701147}
   m_Layer: 0
   m_Name: Snipe
   m_TagString: Untagged
@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6879719728660285069}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 9.22, y: 1.67, z: -1.4}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.64707}
   m_ConstrainProportionsScale: 0
@@ -90,6 +90,33 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!54 &3302010249135410653
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6879719728660285069}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &6262689001416837418
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -124,8 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickup: {fileID: 0}
-  eventCenter: {fileID: 0}
-  coreData: {fileID: 0}
+  coreData: {fileID: 11400000, guid: 9ab8d4fc9440b974e9244e5827826959, type: 2}
   _shootSocket: {fileID: 0}
   rateOfFire: 0
   fireDelay: 0
@@ -146,17 +172,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInteractable: 1
   _hoveredMaterial: {fileID: 2100000, guid: be4843c97f844a24aa319cad41fac0db, type: 2}
+  _coll: {fileID: 0}
+  _rb: {fileID: 0}
   core: {fileID: 5976778014079978446}
---- !u!114 &2194831780603701147
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6879719728660285069}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dad8dd47d0760e04a864d7ab80cdc80b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coreEvents: []

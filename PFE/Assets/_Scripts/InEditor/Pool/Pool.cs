@@ -28,6 +28,7 @@ public class Pool : MonoBehaviour
     public PoolObject PullFromPool(Vector3 position, Quaternion rotation)
     {
         PoolObject poolObject = _pool.Dequeue();
+        poolObject.transform.parent = null;
         poolObject.transform.position = position;
         poolObject.transform.rotation = rotation;
 

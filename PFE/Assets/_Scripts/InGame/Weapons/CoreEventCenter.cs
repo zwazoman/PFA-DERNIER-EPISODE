@@ -15,9 +15,8 @@ public struct CoreEvent
 {
     public string name;
     public Sprite sprite;
-    public UnityEvent Event;
-    public int Slots;
-    public int Lvl;
+    public WCTypes Types;
+    public UnityEvent triggerEvent;
 }
 
 

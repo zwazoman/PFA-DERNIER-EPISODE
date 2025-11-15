@@ -23,10 +23,10 @@ public class CoreUi : MonoBehaviour
         _coreName.text = core.coreData.coreName;
         _coreImage.sprite = core.coreData.sprite;
 
-        for(int i =0; i<core.eventCenter.coreEvents.Count; i++)
-        {
-            coreEventUis[i].EditEvent(core.eventCenter.coreEvents[i]);
-        }
+        //for(int i =0; i<core.eventCenter.coreEvents.Count; i++)
+        //{
+        //    coreEventUis[i].EditEvent(core.eventCenter.coreEvents[i]);
+        //}
     }
 
     public void Click()

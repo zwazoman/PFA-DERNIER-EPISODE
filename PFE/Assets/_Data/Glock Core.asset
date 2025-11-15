@@ -14,3 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <coreName>k__BackingField: Glock
   <sprite>k__BackingField: {fileID: 21300000, guid: 5810647ba72343f4cb82b5be3d3d99cd, type: 3}
+  <coreEvents>k__BackingField:
+  - name: caca partout
+    sprite: {fileID: 0}
+    Types: -1
+    triggerEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - name: chiasse fulgurante
+    sprite: {fileID: 0}
+    Types: -1
+    triggerEvent:
+      m_PersistentCalls:
+        m_Calls: []

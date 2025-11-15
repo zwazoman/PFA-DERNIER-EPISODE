@@ -3,15 +3,18 @@ using UnityEngine;
 using System;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(CoreEventCenter))]
 public class Core : MonoBehaviour
 {
     [HideInInspector] protected PlayerWeaponHandler weaponHandler;
 
     [Header("Public References")]
     [SerializeField] public CorePickup pickup;
-    [SerializeField] public CoreEventCenter eventCenter;
     [SerializeField] public CoreTypeInfo coreData;
+
+    private void Awake()
+    {
+        TryGetComponent(out pickup);
+    }
 
     public virtual void Equip(PlayerWeaponHandler newWeaponHandler)
     {
