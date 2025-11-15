@@ -1,4 +1,5 @@
 
+using AYellowpaper.SerializedCollections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,6 @@ public class CoreTypeInfo : ScriptableObject
     [field : SerializeField]
     public Sprite sprite { get; private set; }
 
-    [field : SerializeField]
-    public List<CoreEvent> coreEvents { get; private set; }
+    [SerializedDictionary("Name", "CoreEvent")]
+    public SerializedDictionary<string, CoreEvent> coreEvents;
 }

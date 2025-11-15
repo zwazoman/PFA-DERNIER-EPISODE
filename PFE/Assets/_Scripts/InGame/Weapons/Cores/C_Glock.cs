@@ -4,16 +4,16 @@ public class C_Glock : ClassicCore
 {
     public override void StartShootTrigger()
     {
-        //foreach (var coreEvent in coreData.coreEvents)
-        //{
-        //    print(coreEvent.name);
-        //    coreEvent.triggerEvent.AddListener(GrosseChiasse);
-        //}
+        foreach (string coreEvent in coreData.coreEvents.Keys)
+        {
+            print(coreEvent);
+            coreData.coreEvents[coreEvent].triggerEvent.AddListener(GrosseChiasse);
+        }
     }
 
     public override void StopShootTrigger()
     {
-        foreach (var coreEvent in coreData.coreEvents)
+        foreach (CoreEvent coreEvent in coreData.coreEvents.Values)
         {
             coreEvent.triggerEvent?.Invoke();
         }

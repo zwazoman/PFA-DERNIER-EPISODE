@@ -240,17 +240,6 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
---- !u!114 &542395139 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1894713900963613231, guid: 6a07b40505670da4989fa8c4f7fd8d32, type: 3}
-  m_PrefabInstance: {fileID: 3894307350562178642}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee77679527930e64fb1623e47879244b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -685,7 +674,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b6f4a071a8e2c841bffaa612a466ed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentPrefab: {fileID: 0}
 --- !u!4 &1658447998
 Transform:
   m_ObjectHideFlags: 0
@@ -872,16 +860,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5976778014079978446, guid: 6f99c7794a8a22f4cacdff552cd6f69c, type: 3}
-      propertyPath: coreData
-      value: 
-      objectReference: {fileID: 11400000, guid: 9ab8d4fc9440b974e9244e5827826959, type: 2}
     - target: {fileID: 6879719728660285069, guid: 6f99c7794a8a22f4cacdff552cd6f69c, type: 3}
       propertyPath: m_Name
       value: Snipe
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2194831780603701147, guid: 6f99c7794a8a22f4cacdff552cd6f69c, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -934,20 +917,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4871588008106129338, guid: 6a07b40505670da4989fa8c4f7fd8d32, type: 3}
-      propertyPath: pickup
-      value: 
-      objectReference: {fileID: 542395139}
-    - target: {fileID: 4871588008106129338, guid: 6a07b40505670da4989fa8c4f7fd8d32, type: 3}
-      propertyPath: coreData
-      value: 
-      objectReference: {fileID: 11400000, guid: ae87319924de7d443914e94f0f833e8e, type: 2}
     - target: {fileID: 7105615674108212650, guid: 6a07b40505670da4989fa8c4f7fd8d32, type: 3}
       propertyPath: m_Name
       value: Glock
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 15633864374957937, guid: 6a07b40505670da4989fa8c4f7fd8d32, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1061,12 +1035,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grappin
       objectReference: {fileID: 0}
-    - target: {fileID: 6613245363075273339, guid: 18d3aaca65385324bb99cf578402fa4d, type: 3}
-      propertyPath: coreData
-      value: 
-      objectReference: {fileID: 11400000, guid: f7c6b877eb6a0fc42a465ad552f5562b, type: 2}
-    m_RemovedComponents:
-    - {fileID: 3887986436342211039, guid: 18d3aaca65385324bb99cf578402fa4d, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

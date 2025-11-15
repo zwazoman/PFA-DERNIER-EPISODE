@@ -13,7 +13,6 @@ public class CoreEventCenter : MonoBehaviour
 [Serializable]
 public struct CoreEvent
 {
-    public string name;
     public Sprite sprite;
     public WCTypes Types;
     public UnityEvent triggerEvent;
