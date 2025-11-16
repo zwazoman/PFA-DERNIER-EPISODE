@@ -464,6 +464,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 00942032-2baa-4b21-8489-72faa7c221d8
     m_ActionName: 'Player/Reload[/Keyboard/r]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3037492679984561314}
+        m_TargetAssemblyTypeName: WeaponMenu, Assembly-CSharp
+        m_MethodName: OpenWeaponMenu
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ac2995cb-8b3b-4130-b91a-ef4cd69d9cd9
+    m_ActionName: 'UI/Open/Close[/Keyboard/tab]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1437,6 +1453,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Right Core UI
       objectReference: {fileID: 0}
+    - target: {fileID: 4976489770259561038, guid: 403f4280c0484b54ab4173a8015d7254, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5765571969663007524, guid: 403f4280c0484b54ab4173a8015d7254, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1613,6 +1633,10 @@ PrefabInstance:
     - target: {fileID: 4976489770259561038, guid: 403f4280c0484b54ab4173a8015d7254, type: 3}
       propertyPath: m_Name
       value: New Core UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 4976489770259561038, guid: 403f4280c0484b54ab4173a8015d7254, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5765571969663007524, guid: 403f4280c0484b54ab4173a8015d7254, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1791,6 +1815,10 @@ PrefabInstance:
     - target: {fileID: 4976489770259561038, guid: 403f4280c0484b54ab4173a8015d7254, type: 3}
       propertyPath: m_Name
       value: Left Core UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 4976489770259561038, guid: 403f4280c0484b54ab4173a8015d7254, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5091800244250225660, guid: 403f4280c0484b54ab4173a8015d7254, type: 3}
       propertyPath: m_AnchorMax.y

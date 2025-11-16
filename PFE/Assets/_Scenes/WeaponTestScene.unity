@@ -978,6 +978,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3269619376814580394, guid: d8ba93af85e388f47b7ead97927caa89, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4170635588787197566, guid: d8ba93af85e388f47b7ead97927caa89, type: 3}
       propertyPath: m_ActionEvents.Array.size
       value: 20
@@ -1017,6 +1021,14 @@ PrefabInstance:
     - target: {fileID: 4170635588787197566, guid: d8ba93af85e388f47b7ead97927caa89, type: 3}
       propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4738889601175078044, guid: d8ba93af85e388f47b7ead97927caa89, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9117068589341517735, guid: d8ba93af85e388f47b7ead97927caa89, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
