@@ -32,4 +32,18 @@ public class Core : MonoBehaviour
     public virtual void StopShootTrigger() { }
 
     public virtual void ReloadTrigger() { }
+
+}
+
+[Serializable]
+public struct CoreEvent
+{
+    public Sprite sprite;
+    public WCTypes Types;
+    public UnityEvent<CoreEventContext> triggerEvent;
+}
+
+public struct CoreEventContext
+{
+
 }

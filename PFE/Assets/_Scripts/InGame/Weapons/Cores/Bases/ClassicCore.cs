@@ -9,7 +9,7 @@ public class ClassicCore : Core
     [Header("Shooting Parameters")]
     [SerializeField] protected float rateOfFire;
     [SerializeField] protected float fireDelay;
-    [SerializeField] protected GameObject projectilePrefab;
+    [SerializeField] protected PoolType poolType;
 
     [Header("Magazine Parameters")]
     [SerializeField] protected int maxAmmoCount;
@@ -78,7 +78,7 @@ public class ClassicCore : Core
 
     protected virtual void Shoot()
     {
-        Instantiate(projectilePrefab, _shootSocket.transform.position, _shootSocket.transform.rotation);
+        PoolManager.Instance.GetPool(poolType).PullFromPool(_shootSocket.transform.position, _shootSocket.transform.rotation);
         currentAmmoCount--;
     }
 

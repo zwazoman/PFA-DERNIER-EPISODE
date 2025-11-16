@@ -29,6 +29,11 @@ public class CoreUi : MonoBehaviour
         //}
     }
 
+    public void EmptyCore()
+    {
+
+    }
+
     public void Click()
     {
         OnClicked?.Invoke();

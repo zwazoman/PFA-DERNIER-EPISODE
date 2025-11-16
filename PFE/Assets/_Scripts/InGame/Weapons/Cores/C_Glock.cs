@@ -13,11 +13,13 @@ public class C_Glock : ClassicCore
 
     public override void StopShootTrigger()
     {
+        CoreEventContext context = new();
+
         foreach (CoreEvent coreEvent in coreData.coreEvents.Values)
         {
-            coreEvent.triggerEvent?.Invoke();
+            coreEvent.triggerEvent?.Invoke(context);
         }
     }
 
-    void GrosseChiasse() => print("Chiassux");
+    void GrosseChiasse(CoreEventContext ctx) => print("Chiassux");
 }

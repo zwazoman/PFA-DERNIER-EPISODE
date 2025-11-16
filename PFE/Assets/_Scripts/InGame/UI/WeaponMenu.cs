@@ -1,9 +1,12 @@
 using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class WeaponMenu : PlayerScript
 {
+    [HideInInspector] bool menuOpened;
+
     [Header("References")]
     [SerializeField] CoreUi _leftCoreUi;
     [SerializeField] CoreUi _rightCoreUi;
@@ -25,12 +28,22 @@ public class WeaponMenu : PlayerScript
     {
         gameObject.SetActive(true);
         main.SwapActionMapToUI();
+
+        _leftCoreUi.gameObject.SetActive(true);
+        _rightCoreUi.gameObject.SetActive(true);
+
+        menuOpened = true;
     }
 
     void Deactivate()
     {
-        gameObject?.SetActive(false);
+        gameObject.SetActive(false);
         main.SwapActionMapToPlayer();
+
+        _leftCoreUi.gameObject.SetActive(false);
+        _rightCoreUi.gameObject.SetActive(false);
+
+        menuOpened = false;
     }
 
     void EditCores(Core leftCore, Core rightCore)
@@ -50,6 +63,10 @@ public class WeaponMenu : PlayerScript
     public async UniTask<bool> OpenCoreChoiceMenu(Core newCore)
     {
         Activate();
+        _newCoreUI.gameObject.SetActive(true);
+
+
+        newCore.gameObject.SetActive(true);
 
         _newCoreUI.SwapCore(newCore);
 
@@ -59,6 +76,7 @@ public class WeaponMenu : PlayerScript
         }
 
         Deactivate();
+        _newCoreUI.gameObject.SetActive(false);
 
         if (_leftSelected)
         {
@@ -85,4 +103,18 @@ public class WeaponMenu : PlayerScript
     void SelectLeft() => _leftSelected = true;
     void SelectRight() => _rightSelected = true;
 
+
+    public void OpenWeaponMenu(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            print("open Ui");
+
+
+            if (menuOpened)
+                Deactivate();
+            else
+                Activate();
+        }
+    }
 }
