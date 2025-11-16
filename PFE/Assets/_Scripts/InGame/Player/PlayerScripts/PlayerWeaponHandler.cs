@@ -52,6 +52,20 @@ public class PlayerWeaponHandler : PlayerScript
         return await main.uiMain.weaponMenu.OpenCoreChoiceMenu(newCore);
     }
 
+    public async UniTask<bool> LinkWC(WC newWC)
+    {
+        return await main.uiMain.weaponMenu.OpenCoreEventChoiceMenu(newWC);
+    }
+
+    public void SwapWC(WC newWC, CoreEvent coreEvent, Core linkedCore)
+    {
+        if (coreEvent.linkedWC != null)
+            coreEvent.linkedWC.Deactivate();
+
+        PositionWC(newWC, linkedCore);
+        newWC.Activate(coreEvent, linkedCore);
+    }
+
     public void SwapLeftCore(Core newCore)
     {
         if (leftWeaponCore != null)
@@ -85,6 +99,15 @@ public class PlayerWeaponHandler : PlayerScript
         core.transform.parent = socket;
         core.transform.position = socket.position;
         core.transform.rotation = socket.rotation;
+    }
+
+    void PositionWC(WC wc, Core core)
+    {
+        Transform wcSocket = core.wcSpots.PickRandom();
+
+        wc.transform.parent = wcSocket;
+        wc.transform.position = wcSocket.position;
+        wc.transform.rotation = wcSocket.rotation;
     }
 
     #region Inputs

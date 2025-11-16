@@ -3,7 +3,7 @@ using AYellowpaper.SerializedCollections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewCoreData", menuName = "Weapon/CoreData")]
+[CreateAssetMenu(fileName = "NewCoreData", menuName = "Weapons/CoreData")]
 public class CoreTypeInfo : ScriptableObject
 {
     [field: SerializeField]
@@ -11,7 +11,4 @@ public class CoreTypeInfo : ScriptableObject
 
     [field : SerializeField]
     public Sprite sprite { get; private set; }
-
-    [SerializedDictionary("Name", "CoreEvent")]
-    public SerializedDictionary<string, CoreEvent> coreEvents;
 }

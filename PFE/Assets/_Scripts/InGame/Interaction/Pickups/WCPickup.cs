@@ -11,4 +11,14 @@ public class WCPickup : Pickup
 
         TryGetComponent(out weaponComponent);
     }
+
+    protected override async void TryPickup(PlayerInteraction interaction)
+    {
+        bool WcLinked = await interaction.main.playerWeaponHandler.LinkWC(weaponComponent);
+
+        if(WcLinked)
+        {
+            base.TryPickup(interaction);
+        }
+    }
 }

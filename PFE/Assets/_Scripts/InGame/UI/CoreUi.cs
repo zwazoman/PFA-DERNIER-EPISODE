@@ -12,9 +12,12 @@ public class CoreUi : MonoBehaviour
     [HideInInspector] public Core core;
 
     [Header("References")]
+    [SerializeField] GameObject _coreEventUiPrefab;
     [SerializeField] TMP_Text _coreName;
     [SerializeField] Image _coreImage;
-    [SerializeField] List<CoreEventUI> coreEventUis = new();
+    [SerializeField] VerticalLayoutGroup _coreEventsLayout;
+
+    [HideInInspector] public List<CoreEventUI> coreEventUis = new();
 
     public void SwapCore(Core newCore)
     {
@@ -23,10 +26,21 @@ public class CoreUi : MonoBehaviour
         _coreName.text = core.coreData.coreName;
         _coreImage.sprite = core.coreData.sprite;
 
-        //for(int i =0; i<core.eventCenter.coreEvents.Count; i++)
-        //{
-        //    coreEventUis[i].EditEvent(core.eventCenter.coreEvents[i]);
-        //}
+        print(coreEventUis.Count);
+
+        if(coreEventUis.Count > 0 )
+            foreach(CoreEventUI ui in coreEventUis)
+                Destroy(ui.gameObject);
+
+
+        for (int i = 0; i < core.coreEvents.Count; i++)
+        {
+            CoreEventUI coreEventUI = Instantiate(_coreEventUiPrefab, _coreEventsLayout.transform).GetComponent<CoreEventUI>();
+
+            coreEventUis.Add(coreEventUI);
+            coreEventUI.core = core;
+            coreEventUI.SwapCoreEvent(core.coreEvents[i]);
+        }
     }
 
     public void EmptyCore()
@@ -34,8 +48,5 @@ public class CoreUi : MonoBehaviour
 
     }
 
-    public void Click()
-    {
-        OnClicked?.Invoke();
-    }
+    public void Click() => OnClicked?.Invoke();
 }

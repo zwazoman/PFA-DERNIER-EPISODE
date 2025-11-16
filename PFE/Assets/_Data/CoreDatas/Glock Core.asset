@@ -18,14 +18,16 @@ MonoBehaviour:
     _serializedList:
     - Key: CACA PARTOUT
       Value:
-        sprite: {fileID: 0}
-        Types: 0
+        eventName: CACA PARTOUT
+        sprite: {fileID: 21300000, guid: 5810647ba72343f4cb82b5be3d3d99cd, type: 3}
+        Types: 1
         triggerEvent:
           m_PersistentCalls:
             m_Calls: []
     - Key: CHIASSE INFERNALE
       Value:
-        sprite: {fileID: 0}
+        eventName: CHIASSE INFERNALE
+        sprite: {fileID: 21300000, guid: 1626ad1414b70634aa29de5eb182ac2d, type: 3}
         Types: 0
         triggerEvent:
           m_PersistentCalls:

@@ -11,10 +11,13 @@ public class WeaponMenu : PlayerScript
     [SerializeField] CoreUi _leftCoreUi;
     [SerializeField] CoreUi _rightCoreUi;
     [SerializeField] CoreUi _newCoreUI;
+    [SerializeField] WCUI _newWCUI;
 
     bool _leftSelected = false;
     bool _rightSelected = false;
-    bool _leave = false;
+    bool _shouldLeave = false;
+
+    CoreEventUI _selectedUIEvent;
 
     private void Start()
     {
@@ -26,6 +29,8 @@ public class WeaponMenu : PlayerScript
 
     void Activate()
     {
+        _shouldLeave = false;
+
         gameObject.SetActive(true);
         main.SwapActionMapToUI();
 
@@ -37,11 +42,16 @@ public class WeaponMenu : PlayerScript
 
     void Deactivate()
     {
+        _shouldLeave = true;
+        _selectedUIEvent = null;
+
         gameObject.SetActive(false);
         main.SwapActionMapToPlayer();
 
         _leftCoreUi.gameObject.SetActive(false);
         _rightCoreUi.gameObject.SetActive(false);
+        _newCoreUI.gameObject.SetActive(false);
+        _newWCUI.gameObject.SetActive(false);
 
         menuOpened = false;
     }
@@ -58,58 +68,82 @@ public class WeaponMenu : PlayerScript
         }
     }
 
-
-
     public async UniTask<bool> OpenCoreChoiceMenu(Core newCore)
     {
         Activate();
         _newCoreUI.gameObject.SetActive(true);
-
-
-        newCore.gameObject.SetActive(true);
 
         _newCoreUI.SwapCore(newCore);
 
         while (!_leftSelected && !_rightSelected)
         {
             await UniTask.Yield();
-        }
 
-        Deactivate();
-        _newCoreUI.gameObject.SetActive(false);
+            if (_shouldLeave)
+                return false;
+        }
 
         if (_leftSelected)
         {
             main.playerWeaponHandler.SwapLeftCore(newCore);
             _leftSelected = false;
-            return true;
         }
-        if (_rightSelected)
+        else if (_rightSelected)
         {
             main.playerWeaponHandler.SwapRightCore(newCore);
             _rightSelected = false;
-            return true;
         }
-        return false;
+
+        Deactivate();
+        _newCoreUI.gameObject.SetActive(false);
+        return true;
     }
 
-    public async UniTask<bool> OpenCoreEventChoiceMenu()
+    public async UniTask<bool> OpenCoreEventChoiceMenu(WC newWC)
     {
-        main.SwapActionMapToUI();
+        Activate();
 
-        return false;
+        _newWCUI.gameObject.SetActive(true);
+        _newWCUI.SwapWC(newWC);
+
+
+        foreach(CoreEventUI leftCoreEventUi in _leftCoreUi.coreEventUis)
+            leftCoreEventUi.OnClicked += LinkWC;
+        foreach(CoreEventUI rightCoreEventUi in _rightCoreUi.coreEventUis)
+            rightCoreEventUi.OnClicked += LinkWC;
+
+
+        while (_selectedUIEvent == null)
+        {
+            await UniTask.Yield();
+
+            if (_shouldLeave) 
+                return false;
+        }
+
+        _selectedUIEvent.LinkWC(newWC);
+
+        main.playerWeaponHandler.SwapWC(newWC, _selectedUIEvent.coreEvent, _selectedUIEvent.core);
+
+        foreach (CoreEventUI leftCoreEventUi in _leftCoreUi.coreEventUis)
+            leftCoreEventUi.OnClicked -= LinkWC;
+        foreach (CoreEventUI rightCoreEventUi in _rightCoreUi.coreEventUis)
+            rightCoreEventUi.OnClicked -= LinkWC;
+
+        Deactivate();
+        return true;
     }
 
     void SelectLeft() => _leftSelected = true;
     void SelectRight() => _rightSelected = true;
 
+    void LinkWC(CoreEventUI coreEventUI) => _selectedUIEvent = coreEventUI; 
 
     public void OpenWeaponMenu(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
         {
             print("open Ui");
-
 
             if (menuOpened)
                 Deactivate();

@@ -2,17 +2,36 @@ using UnityEngine;
 
 public class WC : MonoBehaviour
 {
-    [Header("Parameteres")]
+    [field : SerializeField]
+    public WCTypeInfo WCData { get; private set; }
 
-    [SerializeField] int cost;
-    [SerializeField] int rarity;
-    [SerializeField] WCTypes _types;
+    [SerializeField] WCPickup _pickup;
 
-    public virtual void Activate() { }
-    public virtual void Deactivate() { }
+    protected CoreEvent coreEvent;
+    protected Core core;
 
-    public void LinkToCore()
+    public virtual void Activate(CoreEvent linkedEvent, Core linkedCore)
     {
+        coreEvent = linkedEvent;
+        core = linkedCore;
 
+        coreEvent.linkedWC = this;
+        linkedEvent.triggerEvent.AddListener(Trigger);
+
+        print(coreEvent.linkedWC);
+        print(linkedEvent.linkedWC);
+
+        print(gameObject.name + " was linked to the event " + coreEvent.eventName + " in the " + core.gameObject.name + " core.");
+    }
+
+    public virtual void Trigger(CoreEventContext context) { }
+
+    public virtual void Deactivate()
+    {
+        print("Deactivate " + gameObject.name);
+
+        coreEvent.triggerEvent.RemoveListener(coreEvent.linkedWC.Trigger);
+
+        _pickup.Drop();
     }
 }

@@ -45,9 +45,6 @@ public class PlayerMovement : PlayerScript
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
-        if (!main.CheckActionmap(ctx.action.actionMap))
-            return;
-
         Vector2 ctxValue = ctx.ReadValue<Vector2>();
 
         _moveVector = transform.right * ctxValue.x + transform.forward * ctxValue.y;
@@ -55,9 +52,6 @@ public class PlayerMovement : PlayerScript
 
     public void OnLook(InputAction.CallbackContext ctx)
     {
-        if (!main.CheckActionmap(ctx.action.actionMap))
-            return;
-
         _lookVector = ctx.ReadValue<Vector2>();
     }
 }
