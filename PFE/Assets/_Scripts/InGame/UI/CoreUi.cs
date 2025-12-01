@@ -28,9 +28,14 @@ public class CoreUi : MonoBehaviour
 
         print(coreEventUis.Count);
 
-        if(coreEventUis.Count > 0 )
-            foreach(CoreEventUI ui in coreEventUis)
+        if (coreEventUis.Count > 0)
+        {
+            foreach (CoreEventUI ui in coreEventUis)
                 Destroy(ui.gameObject);
+            coreEventUis.Clear();
+        }
+
+                
 
 
         for (int i = 0; i < core.coreEvents.Count; i++)

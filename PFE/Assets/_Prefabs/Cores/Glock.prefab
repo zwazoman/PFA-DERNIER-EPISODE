@@ -183,11 +183,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d07e636773fb32a4eb66e8187c35b6ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coreEvents:
+  - eventName: CACA PARTOUT
+    sprite: {fileID: 21300000, guid: 5810647ba72343f4cb82b5be3d3d99cd, type: 3}
+    types: 0
+    wcSocket: {fileID: 1637712170033967987}
+    triggerEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    linkedWC: {fileID: 0}
+  - eventName: CHIASSE INFERNALE
+    sprite: {fileID: 21300000, guid: 1626ad1414b70634aa29de5eb182ac2d, type: 3}
+    types: 0
+    wcSocket: {fileID: 3367977184505570600}
+    triggerEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    linkedWC: {fileID: 0}
   pickup: {fileID: 1894713900963613231}
   coreData: {fileID: 11400000, guid: ae87319924de7d443914e94f0f833e8e, type: 2}
-  wcSpots:
-  - {fileID: 1637712170033967987}
-  - {fileID: 3367977184505570600}
   _shootSocket: {fileID: 0}
   rateOfFire: 0
   fireDelay: 0

@@ -62,7 +62,7 @@ public class PlayerWeaponHandler : PlayerScript
         if (coreEvent.linkedWC != null)
             coreEvent.linkedWC.Deactivate();
 
-        PositionWC(newWC, linkedCore);
+        PositionWC(newWC, coreEvent);
         newWC.Activate(coreEvent, linkedCore);
     }
 
@@ -101,13 +101,11 @@ public class PlayerWeaponHandler : PlayerScript
         core.transform.rotation = socket.rotation;
     }
 
-    void PositionWC(WC wc, Core core)
+    void PositionWC(WC wc, CoreEvent coreEvent)
     {
-        Transform wcSocket = core.wcSpots.PickRandom();
-
-        wc.transform.parent = wcSocket;
-        wc.transform.position = wcSocket.position;
-        wc.transform.rotation = wcSocket.rotation;
+        wc.transform.parent = coreEvent.wcSocket;
+        wc.transform.position = coreEvent.wcSocket.position;
+        wc.transform.rotation = coreEvent.wcSocket.rotation;
     }
 
     #region Inputs

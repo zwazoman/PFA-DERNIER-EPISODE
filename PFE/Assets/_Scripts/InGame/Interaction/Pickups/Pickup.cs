@@ -13,6 +13,8 @@ public class Pickup : Interactable
     [SerializeField] Collider _coll;
     [SerializeField] Rigidbody _rb;
 
+    PlayerInteraction _playerInteraction;
+
     protected override void Awake()
     {
         base.Awake();
@@ -28,11 +30,13 @@ public class Pickup : Interactable
         TryPickup(interaction);
     }
 
-    protected virtual void TryPickup(PlayerInteraction interaction)
+    protected virtual void TryPickup(PlayerInteraction playerInteraction)
     {
         //désactive gravité collisions etc
 
         print("picked up");
+        _playerInteraction = playerInteraction;
+
         isInteractable = false;
         _coll.enabled = false;
         _rb.isKinematic = true;
@@ -49,7 +53,12 @@ public class Pickup : Interactable
         isInteractable = true;
         _coll.enabled = true;
         _rb.isKinematic = false;
-        
+
+        _rb.AddForce(Vector3.up * 300 + _playerInteraction.transform.forward * 100);
+        _rb.AddTorque(new Vector3(1,1,1));
+
+        _playerInteraction = null;
+
         OnDropped?.Invoke();
     }
 }

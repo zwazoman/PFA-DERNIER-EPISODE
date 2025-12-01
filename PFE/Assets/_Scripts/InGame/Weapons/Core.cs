@@ -15,8 +15,7 @@ public class Core : MonoBehaviour
     [SerializeField] public CorePickup pickup;
     [SerializeField] public CoreTypeInfo coreData;
 
-    [Header("WC Spots")]
-    [SerializeField] public List<Transform> wcSpots;
+    
 
     private void Awake()
     {
@@ -65,11 +64,12 @@ public class Core : MonoBehaviour
 }
 
 [Serializable]
-public struct CoreEvent
+public class CoreEvent
 {
     public string eventName;
     public Sprite sprite;
-    public WCTypes Types;
+    public WCTypes types;
+    public Transform wcSocket;
     [HideInInspector] public UnityEvent<CoreEventContext> triggerEvent;
     [HideInInspector] public WC linkedWC;
 }
