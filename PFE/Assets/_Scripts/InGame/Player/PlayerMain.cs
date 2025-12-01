@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-
-public class PlayerMain : MonoBehaviour
+using Unity.Netcode;
+public class PlayerMain : NetworkBehaviour
 {
     [Header("Objects")]
     [field : SerializeField] 
@@ -25,14 +25,23 @@ public class PlayerMain : MonoBehaviour
 
     private void Start()
     {
-        playerMovement.main = this;
-        playerWeaponHandler.main = this;
-        playerInteraction.main = this;
-        uiMain.main = this;
+        if (IsOwner)
+        {
+            playerMovement.main = this;
+            playerWeaponHandler.main = this;
+            playerInteraction.main = this;
+            uiMain.main = this;
+        }
+        else
+        {
+            //désactive les scripts inutiles et les inputs des non-owners
 
-        playerInput.currentActionMap.Disable();
-
-        //SwapActionMapToUI();
+            playerInput.enabled = false;
+            playerMovement.enabled = false;
+            playerWeaponHandler.enabled = false;
+            playerInteraction.enabled = false;
+            uiMain.enabled = false;
+        }
     }
 
     public bool CheckActionmap(InputActionMap actionMap)
