@@ -1,8 +1,10 @@
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 using System;
-using UnityEngine.Events;
 using System.Collections.Generic;
+using Unity.Netcode;
+using UnityEngine;
+using UnityEngine.Android;
+using UnityEngine.Events;
 
 public class Core : MonoBehaviour
 {
@@ -61,6 +63,13 @@ public class Core : MonoBehaviour
         }
         Debug.LogError("no core event named " + eventName);
     }
+
+    [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
+    public void ChangeOwnershipRpc(ulong clientId)
+    {
+        GetComponent<NetworkObject>().ChangeOwnership(clientId);
+    }
+
 }
 
 [Serializable]

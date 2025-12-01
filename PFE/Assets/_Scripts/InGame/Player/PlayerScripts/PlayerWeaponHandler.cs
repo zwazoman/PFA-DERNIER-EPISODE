@@ -1,6 +1,8 @@
 using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
+using Unity.Netcode;
+using Unity.Netcode.Editor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -94,16 +96,21 @@ public class PlayerWeaponHandler : PlayerScript
         OnCoreLink?.Invoke(leftWeaponCore, rightWeaponCore);
     }
 
+
     void PositionCore(Transform socket, Core core)
     {
-        core.transform.parent = socket;
+        core.ChangeOwnershipRpc(NetworkManager.Singleton.LocalClientId);
+
+        core.transform.parent = main.transform;
         core.transform.position = socket.position;
         core.transform.rotation = socket.rotation;
     }
 
     void PositionWC(WC wc, CoreEvent coreEvent)
     {
-        wc.transform.parent = coreEvent.wcSocket;
+        //ChangeOwnershipRpc(wc.GetComponent<NetworkObject>());
+
+        wc.transform.parent = main.transform;
         wc.transform.position = coreEvent.wcSocket.position;
         wc.transform.rotation = coreEvent.wcSocket.rotation;
     }
