@@ -25,6 +25,32 @@ public class PlayerMain : NetworkBehaviour
 
     private void Start()
     {
+        //if (IsOwner)
+        //{
+        //    playerMovement.main = this;
+        //    playerWeaponHandler.main = this;
+        //    playerInteraction.main = this;
+        //    uiMain.main = this;
+        //}
+        //else
+        //{
+        //    //désactive les scripts inutiles et les inputs des non-owners
+
+        //    playerInput.enabled = false;
+        //    playerCamera.enabled = false;
+        //    playerCamera.GetComponent<AudioListener>().enabled = false;
+
+        //    playerMovement.enabled = false;
+        //    playerWeaponHandler.enabled = false;
+        //    playerInteraction.enabled = false;
+        //    uiMain.enabled = false;
+        //}
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+
         if (IsOwner)
         {
             playerMovement.main = this;
@@ -37,6 +63,9 @@ public class PlayerMain : NetworkBehaviour
             //désactive les scripts inutiles et les inputs des non-owners
 
             playerInput.enabled = false;
+            playerCamera.enabled = false;
+            playerCamera.GetComponent<AudioListener>().enabled = false;
+
             playerMovement.enabled = false;
             playerWeaponHandler.enabled = false;
             playerInteraction.enabled = false;
