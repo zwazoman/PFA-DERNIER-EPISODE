@@ -1,4 +1,5 @@
 using System;
+using Unity.Netcode.Components;
 using UnityEngine;
 
 public class Pickup : Interactable
@@ -40,6 +41,9 @@ public class Pickup : Interactable
         isInteractable = false;
         _coll.enabled = false;
         _rb.isKinematic = true;
+
+        GetComponent<NetworkRigidbody>().SetIsKinematic(true);
+
         StopHover();
 
         OnPickedUp?.Invoke();

@@ -21,4 +21,18 @@ public class CorePickup : Pickup
             base.TryPickup(interaction);
         }
     }
+
+    public override void OnGainedOwnership()
+    {
+        base.OnGainedOwnership();
+
+        print("GAINED OWNERSHIP : " + OwnerClientId);
+    }
+
+    public override void OnLostOwnership()
+    {
+        base.OnLostOwnership();
+
+        print("LOST OWNERSHIP");
+    }
 }

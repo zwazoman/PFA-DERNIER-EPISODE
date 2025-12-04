@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using Unity.Netcode.Editor;
 using UnityEngine;
 using UnityEngine.Events;
@@ -11,7 +12,7 @@ public class PlayerWeaponHandler : PlayerScript
 {
     #region Events
 
-    public event Action<Core,Core> OnCoreLink;
+    public event Action<Core, Core> OnCoreLink;
 
     #endregion
 
@@ -84,7 +85,7 @@ public class PlayerWeaponHandler : PlayerScript
 
     public void SwapRightCore(Core newCore)
     {
-        if(rightWeaponCore != null)
+        if (rightWeaponCore != null)
         {
             rightWeaponCore.UnEquip();
         }
@@ -96,23 +97,34 @@ public class PlayerWeaponHandler : PlayerScript
         OnCoreLink?.Invoke(leftWeaponCore, rightWeaponCore);
     }
 
-
     void PositionCore(Transform socket, Core core)
     {
-        core.ChangeOwnershipRpc(NetworkManager.Singleton.LocalClientId);
+        PositionRpc(NetworkManager.Singleton.LocalClientId, core);
 
-        core.transform.parent = main.transform;
-        core.transform.position = socket.position;
-        core.transform.rotation = socket.rotation;
+        core.GetComponent<NetworkTransform>().SetState(socket.position, socket.rotation);
+
+        print(core.GetComponent<NetworkObject>().HasAuthority + " " + core.GetComponent<NetworkObject>().OwnerClientId + " " + NetworkManager.Singleton.LocalClientId);
     }
 
     void PositionWC(WC wc, CoreEvent coreEvent)
     {
-        //ChangeOwnershipRpc(wc.GetComponent<NetworkObject>());
+        PositionRpc(NetworkManager.Singleton.LocalClientId, wc);
 
-        wc.transform.parent = main.transform;
-        wc.transform.position = coreEvent.wcSocket.position;
-        wc.transform.rotation = coreEvent.wcSocket.rotation;
+        wc.transform.SetPositionAndRotation(coreEvent.wcSocket.position, coreEvent.wcSocket.rotation);
+    }
+
+    [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
+    void PositionRpc(ulong clientID, NetworkBehaviourReference core)
+    {
+        NetworkBehaviour coreBhv;
+
+        if (core.TryGet(out coreBhv))
+        {
+            NetworkObject netObj = coreBhv.GetComponent<NetworkObject>();
+            netObj.ChangeOwnership(clientID);
+
+            coreBhv.transform.parent = main.transform;
+        }
     }
 
     #region Inputs
@@ -124,7 +136,7 @@ public class PlayerWeaponHandler : PlayerScript
 
         if (ctx.started)
             leftWeaponCore.StartShootTrigger();
-        else if(ctx.canceled)
+        else if (ctx.canceled)
             leftWeaponCore.StopShootTrigger();
 
         _lastUsedCore = leftWeaponCore;

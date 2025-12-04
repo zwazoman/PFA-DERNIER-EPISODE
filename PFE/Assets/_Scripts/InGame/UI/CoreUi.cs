@@ -26,8 +26,6 @@ public class CoreUi : MonoBehaviour
         _coreName.text = core.coreData.coreName;
         _coreImage.sprite = core.coreData.sprite;
 
-        print(coreEventUis.Count);
-
         if (coreEventUis.Count > 0)
         {
             foreach (CoreEventUI ui in coreEventUis)

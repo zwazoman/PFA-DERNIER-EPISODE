@@ -1,6 +1,7 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class WC : MonoBehaviour
+public class WC : NetworkBehaviour
 {
     [field : SerializeField]
     public WCTypeInfo WCData { get; private set; }

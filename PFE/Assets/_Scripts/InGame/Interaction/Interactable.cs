@@ -1,6 +1,7 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class Interactable : MonoBehaviour
+public class Interactable : NetworkBehaviour
 {
     [HideInInspector] public bool isInteractable = true;
     [SerializeField] Material _hoveredMaterial;
