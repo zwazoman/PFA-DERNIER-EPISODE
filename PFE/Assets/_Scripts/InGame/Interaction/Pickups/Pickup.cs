@@ -10,9 +10,6 @@ public class Pickup<T> : Interactable
     public event Action OnDropped;
     public event Action OnPickedUp;
 
-    public event Action<T> OnOwnershipGained;
-    public event Action<T> OnOwnershipLost;
-
     #endregion
 
     public bool IsOwned;

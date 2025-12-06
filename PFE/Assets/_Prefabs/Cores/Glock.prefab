@@ -212,6 +212,7 @@ MonoBehaviour:
   poolType: 0
   maxAmmoCount: 0
   reloadTimeTest: 1
+  _projectilePrefab: {fileID: 2896764884282252996, guid: f6e4044267ddd57418898d6040106cf0, type: 3}
 --- !u!114 &1894713900963613231
 MonoBehaviour:
   m_ObjectHideFlags: 0

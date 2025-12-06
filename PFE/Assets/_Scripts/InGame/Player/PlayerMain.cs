@@ -15,6 +15,9 @@ public class PlayerMain : NetworkBehaviour
     public PlayerMovement playerMovement { get; private set; }
 
     [field : SerializeField]
+    public PlayerHealth playerHealth { get; private set; }
+
+    [field : SerializeField]
     public PlayerWeaponHandler playerWeaponHandler { get; private set; }
 
     [field: SerializeField]
@@ -30,6 +33,7 @@ public class PlayerMain : NetworkBehaviour
         if (IsOwner)
         {
             playerMovement.main = this;
+            playerHealth.main = this;
             playerWeaponHandler.main = this;
             playerInteraction.main = this;
             uiMain.main = this;
@@ -43,6 +47,7 @@ public class PlayerMain : NetworkBehaviour
             playerCamera.GetComponent<AudioListener>().enabled = false;
 
             playerMovement.enabled = false;
+            playerHealth.enabled = false;
             playerWeaponHandler.enabled = false;
             playerInteraction.enabled = false;
             uiMain.enabled = false;

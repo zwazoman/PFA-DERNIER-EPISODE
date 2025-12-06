@@ -51,8 +51,11 @@ public class PlayerInteraction : PlayerScript
     {
         if (ctx.started)
         {
+            print("try interact");
+
             if(_currentInteractable != null)
             {
+                print("interact");
                 _currentInteractable.Interact(this);
             }
         }

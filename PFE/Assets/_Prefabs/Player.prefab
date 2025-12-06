@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 5948277801482190340}
   - component: {fileID: 4980462916316551048}
   - component: {fileID: 3587789608084386626}
+  - component: {fileID: 643320142771382759}
   - component: {fileID: 782015612443783242}
   - component: {fileID: 4170635588787197566}
   - component: {fileID: 3392838850962226005}
@@ -248,6 +249,7 @@ MonoBehaviour:
   <playerCamera>k__BackingField: {fileID: 1639210189838465308}
   <playerInput>k__BackingField: {fileID: 4170635588787197566}
   <playerMovement>k__BackingField: {fileID: 3587789608084386626}
+  <playerHealth>k__BackingField: {fileID: 643320142771382759}
   <playerWeaponHandler>k__BackingField: {fileID: 489298053857041524}
   <playerInteraction>k__BackingField: {fileID: 782015612443783242}
   <uiMain>k__BackingField: {fileID: 2375388730046456920}
@@ -268,6 +270,20 @@ MonoBehaviour:
   _charController: {fileID: 9000097368691749354}
   _moveSpeed: 5
   _mouseSensitivity: 50
+--- !u!114 &643320142771382759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920641940197036532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b96ca31e91c67c94a946a1293b5156e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  main: {fileID: 4980462916316551048}
 --- !u!114 &782015612443783242
 MonoBehaviour:
   m_ObjectHideFlags: 0
