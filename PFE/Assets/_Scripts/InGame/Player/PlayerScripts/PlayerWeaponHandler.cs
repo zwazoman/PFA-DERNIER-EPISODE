@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using Unity.Netcode;
 using Unity.Netcode.Components;
 using Unity.Netcode.Editor;
@@ -60,70 +61,98 @@ public class PlayerWeaponHandler : PlayerScript
         return await main.uiMain.weaponMenu.OpenCoreEventChoiceMenu(newWC);
     }
 
-    public void SwapWC(WC newWC, CoreEvent coreEvent, Core linkedCore)
+    public async void LinkWC(WC newWC, CoreEvent coreEvent, Core linkedCore)
     {
+        ChangeOwnershipRpc(NetworkManager.Singleton.LocalClientId, newWC);
+
+        while (newWC.IsOwnedByServer)
+        {
+            if (IsOwnedByServer)
+                break;
+
+            await UniTask.Yield();
+        }
+
         if (coreEvent.linkedWC != null)
             coreEvent.linkedWC.Deactivate();
 
-        PositionWC(newWC, coreEvent);
         newWC.Activate(coreEvent, linkedCore);
+
+        newWC.transform.parent = main.transform;
+        newWC.GetComponent<NetworkTransform>().SetState(coreEvent.wcSocket.position, coreEvent.wcSocket.rotation);
     }
 
-    public void SwapLeftCore(Core newCore)
+
+    public async void LinkCore(Core core, bool RightSelected)
     {
-        if (leftWeaponCore != null)
+        ChangeOwnershipRpc(NetworkManager.Singleton.LocalClientId, core);
+
+        while (core.IsOwnedByServer)
         {
-            leftWeaponCore.UnEquip();
+            if (IsOwnedByServer)
+                break;
+
+            await UniTask.Yield();
         }
 
-        leftWeaponCore = newCore;
-        leftWeaponCore.Equip(this);
-        PositionCore(_leftCoreSocket, newCore);
+        Transform socket = null;
 
-        OnCoreLink?.Invoke(leftWeaponCore, rightWeaponCore);
-    }
-
-    public void SwapRightCore(Core newCore)
-    {
-        if (rightWeaponCore != null)
+        if (RightSelected)
         {
-            rightWeaponCore.UnEquip();
+            if (rightWeaponCore != null)
+            {
+                rightWeaponCore.UnEquip();
+            }
+
+            socket = _rightCoreSocket;
+            rightWeaponCore = core;
+            rightWeaponCore.Equip(this);
+        }
+        else
+        {
+            if (leftWeaponCore != null)
+            {
+                leftWeaponCore.UnEquip();
+            }
+
+            socket = _leftCoreSocket;
+            leftWeaponCore = core;
+            leftWeaponCore.Equip(this);
         }
 
-        rightWeaponCore = newCore;
-        rightWeaponCore.Equip(this);
-        PositionCore(_rightCoreSocket, newCore);
-
-        OnCoreLink?.Invoke(leftWeaponCore, rightWeaponCore);
-    }
-
-    void PositionCore(Transform socket, Core core)
-    {
-        PositionRpc(NetworkManager.Singleton.LocalClientId, core);
-
+        core.transform.parent = main.transform;
         core.GetComponent<NetworkTransform>().SetState(socket.position, socket.rotation);
 
-        print(core.GetComponent<NetworkObject>().HasAuthority + " " + core.GetComponent<NetworkObject>().OwnerClientId + " " + NetworkManager.Singleton.LocalClientId);
+        OnCoreLink?.Invoke(leftWeaponCore, rightWeaponCore);
     }
 
-    void PositionWC(WC wc, CoreEvent coreEvent)
+    async void PositionWC(WC wc, CoreEvent coreEvent)
     {
-        PositionRpc(NetworkManager.Singleton.LocalClientId, wc);
+        ChangeOwnershipRpc(NetworkManager.Singleton.LocalClientId, wc);
 
-        wc.transform.SetPositionAndRotation(coreEvent.wcSocket.position, coreEvent.wcSocket.rotation);
-    }
-
-    [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
-    void PositionRpc(ulong clientID, NetworkBehaviourReference core)
-    {
-        NetworkBehaviour coreBhv;
-
-        if (core.TryGet(out coreBhv))
+        while (wc.IsOwnedByServer)
         {
-            NetworkObject netObj = coreBhv.GetComponent<NetworkObject>();
-            netObj.ChangeOwnership(clientID);
+            if (IsOwnedByServer)
+                break;
 
-            coreBhv.transform.parent = main.transform;
+            await UniTask.Yield();
+        }
+
+
+
+        wc.transform.parent = main.transform;
+        wc.GetComponent<NetworkTransform>().SetState(coreEvent.wcSocket.position, coreEvent.wcSocket.rotation);
+    }
+
+    [Rpc(SendTo.Server)]
+    void ChangeOwnershipRpc(ulong clientID, NetworkBehaviourReference NetworkBhvRef)
+    {
+        NetworkBehaviour networkBhv;
+
+        if (NetworkBhvRef.TryGet(out networkBhv))
+        {
+            NetworkObject netObj = networkBhv.GetComponent<NetworkObject>();
+            netObj.ChangeOwnership(clientID);
         }
     }
 

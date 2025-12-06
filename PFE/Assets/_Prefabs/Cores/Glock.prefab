@@ -186,6 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d07e636773fb32a4eb66e8187c35b6ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   coreEvents:
   - eventName: CACA PARTOUT
     sprite: {fileID: 21300000, guid: 5810647ba72343f4cb82b5be3d3d99cd, type: 3}
@@ -223,11 +224,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee77679527930e64fb1623e47879244b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   isInteractable: 1
   _hoveredMaterial: {fileID: 2100000, guid: be4843c97f844a24aa319cad41fac0db, type: 2}
+  IsOwned: 0
   _coll: {fileID: 0}
   _rb: {fileID: 0}
-  core: {fileID: 4871588008106129338}
 --- !u!114 &123278970277834958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,8 +245,8 @@ MonoBehaviour:
   GlobalObjectIdHash: 4274299888
   InScenePlacedSourceGlobalObjectIdHash: 2445452111
   DeferredDespawnTick: 0
-  Ownership: 1
-  AlwaysReplicateAsRoot: 1
+  Ownership: 3
+  AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
   SceneMigrationSynchronization: 0
@@ -277,7 +279,7 @@ MonoBehaviour:
   RotationMaxInterpolationTime: 0.1
   ScaleLerpSmoothing: 1
   ScaleMaxInterpolationTime: 0.1
-  AuthorityMode: 0
+  AuthorityMode: 1
   TickSyncChildren: 0
   UseUnreliableDeltas: 0
   SyncPositionX: 1
@@ -314,7 +316,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   NetworkRigidbodyBaseExpanded: 0
   UseRigidBodyForMotion: 0
-  AutoUpdateKinematicState: 1
+  AutoUpdateKinematicState: 0
   AutoSetKinematicOnDespawn: 1
 --- !u!1 &9212388424283542693
 GameObject:

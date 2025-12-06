@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc4e52ba940e404dbdf54f5681cecef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   coreEvents: []
   pickup: {fileID: 0}
   coreData: {fileID: 11400000, guid: 9ab8d4fc9440b974e9244e5827826959, type: 2}
@@ -174,11 +175,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee77679527930e64fb1623e47879244b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   isInteractable: 1
   _hoveredMaterial: {fileID: 2100000, guid: be4843c97f844a24aa319cad41fac0db, type: 2}
+  IsOwned: 0
   _coll: {fileID: 0}
   _rb: {fileID: 0}
-  core: {fileID: 5976778014079978446}
 --- !u!114 &585263974472801462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,8 +196,8 @@ MonoBehaviour:
   GlobalObjectIdHash: 707645748
   InScenePlacedSourceGlobalObjectIdHash: 2228276375
   DeferredDespawnTick: 0
-  Ownership: 1
-  AlwaysReplicateAsRoot: 1
+  Ownership: 3
+  AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
   SceneMigrationSynchronization: 0
@@ -203,7 +205,7 @@ MonoBehaviour:
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
-  AllowOwnerToParent: 0
+  AllowOwnerToParent: 1
 --- !u!114 &3572271496950893087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,7 +230,7 @@ MonoBehaviour:
   RotationMaxInterpolationTime: 0.1
   ScaleLerpSmoothing: 1
   ScaleMaxInterpolationTime: 0.1
-  AuthorityMode: 0
+  AuthorityMode: 1
   TickSyncChildren: 0
   UseUnreliableDeltas: 0
   SyncPositionX: 1
@@ -265,5 +267,5 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   NetworkRigidbodyBaseExpanded: 0
   UseRigidBodyForMotion: 0
-  AutoUpdateKinematicState: 1
+  AutoUpdateKinematicState: 0
   AutoSetKinematicOnDespawn: 1

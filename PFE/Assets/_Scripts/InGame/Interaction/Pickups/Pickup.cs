@@ -1,20 +1,28 @@
 using System;
+using Unity.Netcode;
 using Unity.Netcode.Components;
 using UnityEngine;
 
-public class Pickup : Interactable
+public class Pickup<T> : Interactable
 {
     #region Events
 
     public event Action OnDropped;
     public event Action OnPickedUp;
 
+    public event Action<T> OnOwnershipGained;
+    public event Action<T> OnOwnershipLost;
+
     #endregion
+
+    public bool IsOwned;
+
+    protected T linkedObject;
 
     [SerializeField] Collider _coll;
     [SerializeField] Rigidbody _rb;
 
-    PlayerInteraction _playerInteraction;
+    protected PlayerInteraction currentPlayerInteraction;
 
     protected override void Awake()
     {
@@ -36,7 +44,7 @@ public class Pickup : Interactable
         //désactive gravité collisions etc
 
         print("picked up");
-        _playerInteraction = playerInteraction;
+        currentPlayerInteraction = playerInteraction;
 
         isInteractable = false;
         _coll.enabled = false;
@@ -58,10 +66,10 @@ public class Pickup : Interactable
         _coll.enabled = true;
         _rb.isKinematic = false;
 
-        _rb.AddForce(Vector3.up * 300 + _playerInteraction.transform.forward * 100);
+        _rb.AddForce(Vector3.up * 300 + currentPlayerInteraction.transform.forward * 100);
         _rb.AddTorque(new Vector3(1,1,1));
 
-        _playerInteraction = null;
+        currentPlayerInteraction = null;
 
         OnDropped?.Invoke();
     }

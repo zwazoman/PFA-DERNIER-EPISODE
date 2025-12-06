@@ -934,10 +934,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 585263974472801462, guid: 6f99c7794a8a22f4cacdff552cd6f69c, type: 3}
-      propertyPath: AllowOwnerToParent
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 585263974472801462, guid: 6f99c7794a8a22f4cacdff552cd6f69c, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 707645748
       objectReference: {fileID: 0}
@@ -1064,24 +1060,8 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 123278970277834958, guid: 6a07b40505670da4989fa8c4f7fd8d32, type: 3}
-      propertyPath: Ownership
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 123278970277834958, guid: 6a07b40505670da4989fa8c4f7fd8d32, type: 3}
-      propertyPath: AllowOwnerToParent
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 123278970277834958, guid: 6a07b40505670da4989fa8c4f7fd8d32, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 4274299888
-      objectReference: {fileID: 0}
-    - target: {fileID: 123278970277834958, guid: 6a07b40505670da4989fa8c4f7fd8d32, type: 3}
-      propertyPath: AlwaysReplicateAsRoot
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 422637770032708453, guid: 6a07b40505670da4989fa8c4f7fd8d32, type: 3}
-      propertyPath: AutoUpdateKinematicState
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1806608221348763901, guid: 6a07b40505670da4989fa8c4f7fd8d32, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1123,22 +1103,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2251417270260240209, guid: 6a07b40505670da4989fa8c4f7fd8d32, type: 3}
-      propertyPath: AuthorityMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2251417270260240209, guid: 6a07b40505670da4989fa8c4f7fd8d32, type: 3}
-      propertyPath: SyncPositionX
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2251417270260240209, guid: 6a07b40505670da4989fa8c4f7fd8d32, type: 3}
-      propertyPath: SyncPositionY
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2251417270260240209, guid: 6a07b40505670da4989fa8c4f7fd8d32, type: 3}
-      propertyPath: SyncPositionZ
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7105615674108212650, guid: 6a07b40505670da4989fa8c4f7fd8d32, type: 3}
       propertyPath: m_Name
       value: Glock
@@ -1156,10 +1120,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 502102786343520290, guid: 18d3aaca65385324bb99cf578402fa4d, type: 3}
-      propertyPath: AllowOwnerToParent
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 502102786343520290, guid: 18d3aaca65385324bb99cf578402fa4d, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1267389316

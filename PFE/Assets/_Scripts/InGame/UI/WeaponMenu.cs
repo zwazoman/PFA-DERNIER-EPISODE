@@ -85,12 +85,12 @@ public class WeaponMenu : PlayerScript
 
         if (_leftSelected)
         {
-            main.playerWeaponHandler.SwapLeftCore(newCore);
+            main.playerWeaponHandler.LinkCore(newCore, false);
             _leftSelected = false;
         }
         else if (_rightSelected)
         {
-            main.playerWeaponHandler.SwapRightCore(newCore);
+            main.playerWeaponHandler.LinkCore(newCore, true);
             _rightSelected = false;
         }
 
@@ -123,7 +123,7 @@ public class WeaponMenu : PlayerScript
 
         _selectedUIEvent.LinkWC(newWC);
 
-        main.playerWeaponHandler.SwapWC(newWC, _selectedUIEvent.coreEvent, _selectedUIEvent.core);
+        main.playerWeaponHandler.LinkWC(newWC, _selectedUIEvent.coreEvent, _selectedUIEvent.core);
 
         foreach (CoreEventUI leftCoreEventUi in _leftCoreUi.coreEventUis)
             leftCoreEventUi.OnClicked -= LinkWC;

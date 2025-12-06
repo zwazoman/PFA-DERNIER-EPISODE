@@ -1,38 +1,22 @@
 using UnityEngine;
 
 
-public class CorePickup : Pickup
+public class CorePickup : Pickup<Core>
 {
-    [SerializeField] public Core core;
-
     protected override void Awake()
     {
         base.Awake();
 
-        TryGetComponent(out core);
+        TryGetComponent(out linkedObject);
     }
 
     protected override async void TryPickup(PlayerInteraction interaction)
     {
-        bool coreLinked = await interaction.main.playerWeaponHandler.LinkCore(core);
+        bool coreLinked = await interaction.main.playerWeaponHandler.LinkCore(linkedObject);
 
         if (coreLinked)
         {
             base.TryPickup(interaction);
         }
-    }
-
-    public override void OnGainedOwnership()
-    {
-        base.OnGainedOwnership();
-
-        print("GAINED OWNERSHIP : " + OwnerClientId);
-    }
-
-    public override void OnLostOwnership()
-    {
-        base.OnLostOwnership();
-
-        print("LOST OWNERSHIP");
     }
 }

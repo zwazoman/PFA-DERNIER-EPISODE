@@ -1,20 +1,18 @@
 using UnityEngine;
 
 [RequireComponent(typeof(WC))]
-public class WCPickup : Pickup
+public class WCPickup : Pickup<WC>
 {
-    [SerializeField] public WC weaponComponent;
-
     protected override void Awake()
     {
         base.Awake();
 
-        TryGetComponent(out weaponComponent);
+        TryGetComponent(out linkedObject);
     }
 
     protected override async void TryPickup(PlayerInteraction interaction)
     {
-        bool WcLinked = await interaction.main.playerWeaponHandler.LinkWC(weaponComponent);
+        bool WcLinked = await interaction.main.playerWeaponHandler.LinkWC(linkedObject);
 
         if(WcLinked)
         {

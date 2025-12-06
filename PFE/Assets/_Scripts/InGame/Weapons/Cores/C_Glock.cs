@@ -4,6 +4,7 @@ public class C_Glock : ClassicCore
 {
     public override void StartShootTrigger()
     {
+        print("caca tout dur");
         TriggerCoreEvent("CACA PARTOUT", SetupContext());
     }
 

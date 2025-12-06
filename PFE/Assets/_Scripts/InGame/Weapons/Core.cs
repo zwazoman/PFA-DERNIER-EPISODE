@@ -33,7 +33,14 @@ public class Core : NetworkBehaviour
     {
         weaponHandler = null;
         pickup.Drop();
+        //GiveOwnerShipToServerRpc();
     }
+
+    //[Rpc(SendTo.Server)]
+    //void GiveOwnerShipToServerRpc()
+    //{
+    //    GetComponent<NetworkObject>().ChangeOwnership(NetworkManager.Singleton.LocalClientId);
+    //}
 
     public virtual void StartShootTrigger() { }
 
@@ -48,11 +55,6 @@ public class Core : NetworkBehaviour
 
     protected void TriggerCoreEvent(string eventName, CoreEventContext context)
     {
-        //if (coreData.coreEvents.ContainsKey(eventName))
-        //    coreData.coreEvents[eventName].triggerEvent?.Invoke(context);
-        //else
-        //    Debug.LogError("wrong name");
-
         foreach (CoreEvent coreEvent in coreEvents)
         {
             if (coreEvent.eventName == eventName)

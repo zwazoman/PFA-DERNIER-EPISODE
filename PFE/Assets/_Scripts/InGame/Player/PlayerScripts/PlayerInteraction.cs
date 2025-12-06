@@ -8,7 +8,6 @@ public class PlayerInteraction : PlayerScript
     [SerializeField] LayerMask _interactMask;
 
     Interactable _currentInteractable;
-    Pickup _currentPickup;
 
     private void Update()
     {
